@@ -1,0 +1,4 @@
+-- add further database setup here, like:
+-- "CREATE DATABASE app_data;"
+-- "CREATE USER app_user WITH PASSWORD 'app_password';"
+-- "GRANT ALL PRIVILEGES ON DATABASE app_data TO app_user;"

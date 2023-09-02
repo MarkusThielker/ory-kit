@@ -1,0 +1,55 @@
+{
+  "common": {
+    "app_name": "Kratos User Interface",
+    "error": "Etwas ist schief gelaufen",
+    "save": "Speichern",
+    "email": "Email",
+    "username": "Nutzername",
+    "password": "Passwort",
+    "name": "Name",
+    "description": "Beschreibung"
+  },
+  "login": {
+    "title": "Anmelden",
+    "submit": "Anmelden",
+    "forgot": "Passwort vergessen?",
+    "registration": "Erstelle einen Account"
+  },
+  "logout": {
+    "title": "Abmelden"
+  },
+  "registration": {
+    "title": "Registrieren",
+    "submit": "Registrieren",
+    "login": "Hast du schon einen Account?"
+  },
+  "recovery": {
+    "title": "Account wiederherstellen",
+    "submit": "Wiederherstellen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "profile": {
+      "title": "Profil"
+    },
+    "password": {
+      "title": "Passwort ändern"
+    },
+    "totp": {
+      "title": "Zwei-Faktor-Authentifizierung"
+    },
+    "webauthn": {
+      "title": "WebAuthn"
+    },
+    "lookup_secret": {
+      "title": "Wiederherstellungscodes"
+    }
+  },
+  "verification": {
+    "title": "Verifizierung"
+  },
+  "root": {
+    "title": "Welcome",
+    "greeting": "Willkommen, {name}!"
+  }
+}
