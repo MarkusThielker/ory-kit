@@ -1,4 +1,0 @@
-[http.middlewares.simpleAuth.basicAuth]
-users = [
-    "admin:$apr1$pg6eJBDL$1hj3nZaWTdmRYhzepoRpM0"
-]
