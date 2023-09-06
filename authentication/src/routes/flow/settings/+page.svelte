@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ory from "$lib/ory";
+    import { frontendApi } from "$lib/ory";
     import { t } from "$lib/i18n";
     import Flow from "$lib/components/ory/Flow.svelte";
     import { get } from "svelte/store";
@@ -10,11 +10,11 @@
 
     let promise: Promise<SettingsFlow>;
     if (get(page).url.searchParams.get("flow")) {
-        promise = ory
+        promise = frontendApi
             .getSettingsFlow({ id: get(page).url.searchParams.get("flow")! })
             .then((it) => it.data);
     } else {
-        promise = ory.createBrowserSettingsFlow().then((it) => it.data);
+        promise = frontendApi.createBrowserSettingsFlow().then((it) => it.data);
     }
 
     onMount(() => {

@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import type { Identity } from "@ory/client";
-import ory from "$lib/ory";
+import { frontendApi } from "$lib/ory";
 import { browser } from "$app/environment";
 
 const store = () => {
@@ -12,7 +12,7 @@ const store = () => {
         loadIdentity: async () => {
             if (browser) {
                 try {
-                    await ory.toSession().then((response) => {
+                    await frontendApi.toSession().then((response) => {
                         if (response.status === 200) {
                             set(response.data.identity);
                         }
