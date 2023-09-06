@@ -6,17 +6,17 @@
     import type { RegistrationFlow } from "@ory/client";
     import { get } from "svelte/store";
     import { page } from "$app/stores";
-    import ory from "$lib/ory";
+    import { frontendApi } from "$lib/ory";
 
     let promise: Promise<RegistrationFlow>;
     if (get(page).url.searchParams.get("flow")) {
-        promise = ory
+        promise = frontendApi
             .getRegistrationFlow({
                 id: get(page).url.searchParams.get("flow")!,
             })
             .then((it) => it.data);
     } else {
-        promise = ory.createBrowserRegistrationFlow().then((it) => it.data);
+        promise = frontendApi.createBrowserRegistrationFlow().then((it) => it.data);
     }
 
     onMount(() => {

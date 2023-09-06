@@ -3,7 +3,7 @@
     import identityStore from "$lib/stores/identity";
     import { t } from "$lib/i18n";
     import type { Identity } from "@ory/client";
-    import ory from "$lib/ory";
+    import { frontendApi } from "$lib/ory";
 
     const identity: Identity | null = get(identityStore);
 </script>
@@ -29,7 +29,7 @@
             <a href="/flow/settings" class="btn-primary w-full">
                 {$t("page.settings.title")}
             </a>
-            {#await ory.createBrowserLogoutFlow() then flow}
+            {#await frontendApi.createBrowserLogoutFlow() then flow}
                 <a
                     href={flow.data.logout_url}
                     data-sveltekit-preload-data="tap"
