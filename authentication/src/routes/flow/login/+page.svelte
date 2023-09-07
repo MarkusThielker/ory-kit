@@ -14,7 +14,23 @@
             .getLoginFlow({ id: get(page).url.searchParams.get("flow")! })
             .then((it) => it.data);
     } else {
-        promise = ory.createBrowserLoginFlow().then((it) => it.data);
+
+        const requestParameters: {refresh?: boolean, aal?: string, returnTo?: string, loginChallenge?: string} = {}
+        if (get(page).url.searchParams.get("refresh")) {
+            requestParameters.refresh = Boolean(get(page).url.searchParams.get("refresh")!);
+        }
+        if (get(page).url.searchParams.get("aal")) {
+            requestParameters.aal = get(page).url.searchParams.get("aal")! as string
+        }
+        if (get(page).url.searchParams.get("return_to")) {
+            requestParameters.returnTo = get(page).url.searchParams.get("return_to")! as string
+        }
+        if (get(page).url.searchParams.get("login_challenge")) {
+            requestParameters.loginChallenge = get(page).url.searchParams.get("login_challenge")! as string
+        }
+
+        promise = ory.createBrowserLoginFlow(requestParameters)
+            .then((it) => it.data);
     }
 
     onMount(() => {

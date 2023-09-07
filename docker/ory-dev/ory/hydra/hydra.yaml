@@ -24,18 +24,30 @@ dsn: postgres://postgres:postgres@postgres:5432/hydra?sslmode=disable&max_conns=
 #
 serve:
 
+  public:
+    cors:
+      enabled: true
+      debug: true
+      allowed_origins:
+        - "*"
+
   admin:
     cors:
       enabled: true
       debug: true
       allowed_origins:
         - "*"
-        - http://localhost
-        - http://localhost:4433
-        - http://localhost:4434
 
   cookies:
+    domain: http://localhost
     same_site_mode: Lax
+    secure: false
+    paths:
+      session: /
+    names:
+      consent_csrf: ory_hydra_consent_csrf
+      session: ory_hydra_session
+      login_csrf: ory_hydra_login_csrf
 
 
 urls:
@@ -49,9 +61,9 @@ urls:
     url: http://kratos:4434
 
   self:
-    public: https://localhost:4444
-    admin: https://localhost:4445
-    issuer: https://localhost:4444
+    public: http://localhost:4444
+    admin: http://localhost:4445
+    issuer: http://localhost:4444
 
 
 #
