@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-white dark:bg-neutral-900 text-indigo-900 dark:text-white p-16 duration-300;
+}
+
 .rounded-shape {
     @apply rounded-none;
 }
@@ -10,32 +14,80 @@
     @apply rounded-shape py-2.5 px-2.5;
 }
 
+.border-style {
+    @apply 
+        border
+        border-black
+        dark:border-white;
+}
+
 .heading {
     @apply text-2xl font-semibold;
 }
 
 .card {
-    @apply border rounded-shape p-4 max-w-lg mx-auto;
+    @apply border-style rounded-shape p-4 max-w-lg mx-auto;
 }
 
 .alternative-actions {
     @apply card flex flex-col mt-4;
 }
 
+a {
+    @apply text-black dark:text-white hover:text-cyan-400 dark:hover:text-cyan-200 duration-300;
+}
+
 .text-input {
-    @apply w-full theme-container border border-gray-500 focus:border-cyan-400 focus:outline-none;
+    @apply 
+        w-full 
+        theme-container 
+        bg-white
+        text-black
+        dark:bg-neutral-900
+        dark:text-white
+        border-style 
+        duration-300 
+        focus:border-cyan-400 
+        focus:outline-none;
 }
 
 .btn-primary {
-    @apply w-full theme-container bg-cyan-200 text-center text-cyan-900 font-medium hover:bg-black hover:text-white duration-300;
+    @apply 
+        w-full 
+        theme-container 
+        bg-cyan-200 
+        text-cyan-900 
+        dark:bg-cyan-200 
+        dark:text-cyan-900 
+        text-center 
+        font-medium 
+        duration-300 
+        hover:bg-black 
+        hover:text-white 
+        dark:hover:bg-white 
+        dark:hover:text-black;
 }
 
 .btn-secondary {
-    @apply w-full theme-container bg-white border border-black text-center text-cyan-900 font-medium hover:bg-black hover:text-white duration-300;
+    @apply 
+        w-full 
+        theme-container 
+        bg-white 
+        text-cyan-900 
+        dark:bg-neutral-900
+        dark:text-cyan-200 
+        text-center 
+        font-medium 
+        duration-300 
+        border-style
+        hover:bg-white 
+        hover:text-black 
+        dark:hover:bg-white 
+        dark:hover:text-black;
 }
 
 .alert {
-    @apply theme-container relative;
+    @apply theme-container relative rounded-shape;
 }
 
 .alert-success {

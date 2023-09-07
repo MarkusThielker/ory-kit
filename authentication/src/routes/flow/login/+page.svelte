@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ory from "$lib/ory";
+    import { frontendApi } from "$lib/ory";
     import { t } from "$lib/i18n";
     import Flow from "$lib/components/ory/Flow.svelte";
     import { get } from "svelte/store";
@@ -10,7 +10,7 @@
 
     let promise: Promise<LoginFlow>;
     if (get(page).url.searchParams.get("flow")) {
-        promise = ory
+        promise = frontendApi
             .getLoginFlow({ id: get(page).url.searchParams.get("flow")! })
             .then((it) => it.data);
     } else {
@@ -29,7 +29,7 @@
             requestParameters.loginChallenge = get(page).url.searchParams.get("login_challenge")! as string
         }
 
-        promise = ory.createBrowserLoginFlow(requestParameters)
+        promise = frontendApi.createBrowserLoginFlow(requestParameters)
             .then((it) => it.data);
     }
 
@@ -75,7 +75,7 @@
                 messages={flow.ui.messages}
             />
 
-            {#await ory.createBrowserLogoutFlow() then flow}
+            {#await frontendApi.createBrowserLogoutFlow() then flow}
                 <div class="flex card">
                     <a
                         href={flow.data.logout_url}

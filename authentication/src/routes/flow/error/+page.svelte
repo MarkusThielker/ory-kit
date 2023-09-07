@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ory from "$lib/ory";
+    import { frontendApi } from "$lib/ory";
     import { t } from "$lib/i18n";
     import { page } from "$app/stores";
     import { get } from "svelte/store";
@@ -15,7 +15,7 @@
 
     let errorId: string | null = get(page).url.searchParams.get("id");
 
-    let promise = ory
+    let promise = frontendApi
         .getFlowError({ id: errorId ?? "" })
         .then((it) => it.data.error as Error);
 
