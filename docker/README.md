@@ -8,13 +8,16 @@ cd ory-dev
 
 # execute the docker compose file
 docker compose up -d
+
+# create an OAuth2 client
+sh ./hydra-setup.sh
 ```
 
 This command will start up multiple containers in the background.
 
 ## Services and Ports
 
-As mentioned above, the docker command starts multiple container which interact witheach other. 
+As mentioned above, the docker command starts multiple container which interact with each other. 
 Here you see a list of all services and their exposed ports. 
 These ports are only exposed to the host machine.
 If you start up the environment on a remote server, you will need to tunnel the ports.
@@ -27,4 +30,7 @@ If you start up the environment on a remote server, you will need to tunnel the 
 | ORY Kratos     | 4434 (✗)      | User management system handling users and self-service flows (Admin API)  |
 | Mailslurper    | 4436 (✗)      | Mock mailing server (Dashboard)                                           |
 | Mailslurper    | 4437 (✗)      | Mock mailing server (API)                                                 |
+| ORY Hydra      | 4444 (✗)      | OAuth2 and OIDC server connected to Kratos (Public API)                   |
+| ORY Hydra      | 4445 (✗)      | OAuth2 and OIDC server connected to Kratos (Admin API)                    |
+| ORY Hydra      | 5555 (✗)      | Hydra test application to test the consent flow                           |
 | Postgres DB    | 4455 (✗)      | Postgres database for storing user data                                   |

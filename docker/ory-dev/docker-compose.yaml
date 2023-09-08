@@ -18,9 +18,6 @@ services:
 
   kratos:
     container_name: kratos
-    depends_on:
-      kratos-migrate:
-        condition: service_completed_successfully
     image: oryd/kratos:v1.0.0
     ports:
       - 127.0.0.1:4433:4433 # public
@@ -30,6 +27,44 @@ services:
       - kratos-data:/home/ory
       - kratos-data:/var/lib/sqlite
     command: serve -c /etc/config/kratos/kratos.yaml --dev --watch-courier
+    depends_on:
+      kratos-migrate:
+        condition: service_completed_successfully
+    networks:
+      - intranet
+
+
+  hydra-migrate:
+    container_name: hydra-migrate
+    image: oryd/hydra:v2.2.0
+    volumes:
+      - ./ory/hydra:/etc/config/hydra
+      - hydra-data:/home/ory
+      - hydra-data:/var/lib/sqlite
+    command: migrate -c /etc/config/hydra/hydra.yaml sql -e --yes
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - intranet
+
+
+  hydra:
+    container_name: hydra
+    image: oryd/hydra:v2.2.0
+    ports:
+      - "127.0.0.1:4444:4444" # public
+      - "127.0.0.1:4445:4445" # admin
+      - "127.0.0.1:5555:5555" # Port for hydra token user
+    volumes:
+      - ./ory/hydra:/etc/config/hydra
+      - hydra-data:/home/ory
+      - hydra-data:/var/lib/sqlite
+    command: serve -c /etc/config/hydra/hydra.yaml all --dev
+    depends_on:
+      hydra-migrate:
+        condition: service_completed_successfully
     networks:
       - intranet
 
@@ -71,4 +106,5 @@ networks:
 
 volumes:
   kratos-data:
+  hydra-data:
   postgres-data:

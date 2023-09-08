@@ -6,10 +6,11 @@ All UI components will be written in Svelte and Typescript, and styled using Tai
 
 ## Getting started
 
-Start the backend services using docker-compose:
+Start the backend services using Docker Compose:
 
 ```bash
-docker-compose -f docker/ory-dev/docker-compose.yaml up -d
+docker compose -f docker/ory-dev/docker-compose.yaml up -d
+sh docker/ory-dev/hydra-setup.sh # creates an OAuth2 client (test the consent flow on localhost:5555)
 ```
 
 Then start the authentication UI using npm:

@@ -1,5 +1,5 @@
 #
-# Documentation: https://www.ory.sh/docs/kratos/configuring
+# Documentation: https://www.ory.sh/docs/kratos/reference/configuration
 # Configuration UI: https://www.ory.sh/docs/kratos/reference/configuration-editor
 #
 
@@ -98,6 +98,14 @@ selfservice:
         password:
           hooks:
             - hook: session # automatically sign-in after registration
+
+# 
+# Configure connection to hydra for oauth2 and oidc.
+# If set, the login and registration flows will handle the Ory OAuth 2.0 & OpenID `login_challenge` query parameter to serve as an OpenID Connect Provider.
+# 
+oauth2_provider:
+  override_return_to: false
+  url: http://hydra:4445
 
 #
 # Configure secrets and key rotation.
