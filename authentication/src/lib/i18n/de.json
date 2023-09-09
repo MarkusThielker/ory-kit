@@ -48,8 +48,14 @@
   "verification": {
     "title": "Verifizierung"
   },
+  "consent": {
+    "title": "Autorisierung",
+    "description": "Willkommen {{name}}. Die Anwendung {{client}} möchte Zugriff auf folgende Daten:",
+    "accept": "Akzeptieren",
+    "reject": "Ablehnen"
+  },
   "root": {
     "title": "Welcome",
-    "greeting": "Willkommen, {name}!"
+    "greeting": "Willkommen, {{name}}!"
   }
 }

@@ -48,6 +48,12 @@
   "verification": {
     "title": "Verification"
   },
+  "consent": {
+    "title": "Consent",
+    "description": "Welcome {{name}}. The application {{client}} wants to access the following resources:",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
   "root": {
     "title": "Welcome",
     "greeting": "Welcome, {{name}}!"
