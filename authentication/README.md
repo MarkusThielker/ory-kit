@@ -1,7 +1,9 @@
 # Authentication UI
 
-This sveltekit application is the authentication UI for our Ory Identities instance.
+This sveltekit application is the authentication UI for our Ory Kratos instance.
 It implements the dynamic flow system, used by Kratos, to render the required inputs.
+
+It also implements the consent screen for the Ory Hydra consent flow.
 
 ## Dynamic Flows
 
