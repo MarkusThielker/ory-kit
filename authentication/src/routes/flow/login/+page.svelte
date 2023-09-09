@@ -4,7 +4,6 @@
     import Flow from "$lib/components/ory/Flow.svelte";
     import { get } from "svelte/store";
     import { page } from "$app/stores";
-    import { onMount } from "svelte";
     import type { LoginFlow } from "@ory/client";
     import identity from "$lib/stores/identity";
 
@@ -13,6 +12,10 @@
         promise = frontendApi
             .getLoginFlow({ id: get(page).url.searchParams.get("flow")! })
             .then((it) => it.data);
+
+        if ($identity) {
+            window.location.replace("/");
+        }
     } else {
 
         const requestParameters: {refresh?: boolean, aal?: string, returnTo?: string, loginChallenge?: string} = {}
@@ -29,15 +32,8 @@
             requestParameters.loginChallenge = get(page).url.searchParams.get("login_challenge")! as string
         }
 
-        promise = frontendApi.createBrowserLoginFlow(requestParameters)
-            .then((it) => it.data);
+        promise = frontendApi.createBrowserLoginFlow(requestParameters).then((it) => it.data);
     }
-
-    onMount(() => {
-        if ($identity) {
-            window.location.replace("/");
-        }
-    });
 </script>
 
 <svelte:head>

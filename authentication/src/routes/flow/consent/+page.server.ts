@@ -1,5 +1,6 @@
 import { oauthApi } from "$lib/server/ory";
 import type { PageServerLoad } from "./$types";
+import { redirect, type Actions } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ url }) => {
 
@@ -8,13 +9,28 @@ export const load: PageServerLoad = async ({ url }) => {
         return { status: 400 };
     }
 
-    console.log("consentChallenge", consentChallenge);
-
-    const request = await oauthApi
+    const requestRequest = await oauthApi
         .getOAuth2ConsentRequest({ consentChallenge })
         .then((it) => it.data);
 
     return {
-        oauth2ConsentRequest: request,
+        oauth2ConsentRequest: requestRequest,
     };
+};
+
+export const actions: Actions = {
+	accept: async ({ request }) => {
+        const data = await request.formData();
+        const response = await oauthApi.acceptOAuth2ConsentRequest({ 
+            consentChallenge: data.get("consentChallenge") as string 
+        })
+        throw redirect(303, response.data.redirect_to)
+    },
+	reject: async ({ request }) => {
+        const data = await request.formData();
+        const response = await oauthApi.rejectOAuth2ConsentRequest({ 
+            consentChallenge: data.get("consentChallenge") as string 
+        })
+        throw redirect(303, response.data.redirect_to)
+    }
 };
