@@ -22,21 +22,32 @@ dsn: postgres://postgres:postgres@postgres:5432/kratos?sslmode=disable&max_conns
 #
 serve:
   public:
-    base_url: http://localhost:4433
+    base_url: https://accounts.thielker.xyz/kratos/public
     cors:
       enabled: true
       allowed_origins:
-        - http://localhost:4422
+        - "*"
   admin:
-    base_url: http://localhost:4434
+    base_url: https://accounts.thielker.xyz/kratos/admin
+
+#
+# Configure cookies.
+#
+cookies:
+  domain: "accounts.thielker.xyz"
+  path: "/"
+  same_site: Strict
 
 #
 # Configure the session cookie.
 #
-cookies:
-  domain: http://localhost
-  path: /
-  same_site: Lax
+session:
+  cookie:
+    name: thielker_sso_session
+    domain: "thielker.xyz"
+    path: "/"
+    same_site: Lax
+    persistent: false
 
 #
 # Configure the self-service flows.session.
@@ -44,9 +55,9 @@ cookies:
 # You can also activate authentication methods.
 #
 selfservice:
-  default_browser_return_url: http://localhost:4422
+  default_browser_return_url: https://accounts.thielker.xyz
   allowed_return_urls:
-    - http://localhost:4422
+    - https://accounts.thielker.xyz
 
   methods:
     password:
@@ -62,29 +73,29 @@ selfservice:
         rp:
           id: localhost
           origins:
-            - http://localhost:4422
+            - https://accounts.thielker.xyz
           display_name: ORY Template
     lookup_secret:
       enabled: true
 
   flows:
     error:
-      ui_url: http://localhost:4422/flow/error
+      ui_url: https://accounts.thielker.xyz/flow/error
 
     settings:
       required_aal: highest_available
-      ui_url: http://localhost:4422/flow/settings
+      ui_url: https://accounts.thielker.xyz/flow/settings
 
     recovery:
       enabled: true
-      ui_url: http://localhost:4422/flow/recovery
+      ui_url: https://accounts.thielker.xyz/flow/recovery
 
     verification:
       enabled: true
-      ui_url: http://localhost:4422/flow/verification
+      ui_url: https://accounts.thielker.xyz/flow/verification
 
     login:
-      ui_url: http://localhost:4422/flow/login
+      ui_url: https://accounts.thielker.xyz/flow/login
       lifespan: 10m
     #      after:
     #        hooks:
@@ -92,9 +103,9 @@ selfservice:
 
     registration:
       lifespan: 10m
-      ui_url: http://localhost:4422/flow/registration
+      ui_url: https://accounts.thielker.xyz/flow/registration
       after:
-        default_browser_return_url: http://localhost:4422
+        default_browser_return_url: https://accounts.thielker.xyz
         password:
           hooks:
             - hook: session # automatically sign-in after registration

@@ -39,7 +39,7 @@ serve:
         - "*"
 
   cookies:
-    domain: http://localhost
+    domain: https://thielker.xyz
     same_site_mode: Lax
     secure: false
     paths:
@@ -52,18 +52,18 @@ serve:
 
 urls:
 
-  consent: http://localhost:4422/flow/consent
-  login: http://localhost:4422/flow/login
-  logout: http://localhost:4422/flow/logout
-  post_logout_redirect: http://localhost:4422
+  consent: https://accounts.thielker.xyz/flow/consent
+  login: https://accounts.thielker.xyz/flow/login
+  logout: https://accounts.thielker.xyz/flow/logout
+  post_logout_redirect: https://accounts.thielker.xyz
 
   identity_provider:
     url: http://kratos:4434
 
   self:
-    public: http://localhost:4444
-    admin: http://localhost:4445
-    issuer: http://localhost:4444
+    public: https://accounts.thielker.xyz/hydra/public
+    admin: https://accounts.thielker.xyz/hydra/admin
+    issuer: https://accounts.thielker.xyz/hydra/public
 
 
 #
