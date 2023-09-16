@@ -50,24 +50,15 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.http.routers.xyz-accounts-kratos-admin.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/kratos/admin`)
-      - traefik.http.routers.xyz-accounts-kratos-admin.entrypoints=web, websecure
-      - traefik.http.routers.xyz-accounts-kratos-admin.tls=true
-      - traefik.http.routers.xyz-accounts-kratos-admin.tls.certresolver=lets-encrypt
-      - traefik.http.routers.xyz-accounts-kratos-admin.service=xyz-accounts-kratos-admin
-      - traefik.http.routers.xyz-accounts-kratos-admin.middlewares=xyz-accounts-kratos-admin
-      - traefik.http.services.xyz-accounts-kratos-admin.loadbalancer.server.port=4434
-      - traefik.http.middlewares.xyz-accounts-kratos-admin.stripprefix.prefixes=/kratos/admin
-      - traefik.http.middlewares.xyz-accounts-kratos-admin.stripprefix.forceSlash=false
-      - traefik.http.routers.xyz-accounts-kratos-public.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/kratos/public`)
-      - traefik.http.routers.xyz-accounts-kratos-public.entrypoints=web, websecure
-      - traefik.http.routers.xyz-accounts-kratos-public.tls=true
-      - traefik.http.routers.xyz-accounts-kratos-public.tls.certresolver=lets-encrypt
-      - traefik.http.routers.xyz-accounts-kratos-public.service=xyz-accounts-kratos-public
-      - traefik.http.routers.xyz-accounts-kratos-public.middlewares=xyz-accounts-kratos-public
-      - traefik.http.services.xyz-accounts-kratos-public.loadbalancer.server.port=4433
-      - traefik.http.middlewares.xyz-accounts-kratos-public.stripprefix.prefixes=/kratos/public
-      - traefik.http.middlewares.xyz-accounts-kratos-public.stripprefix.forceSlash=false
+      - traefik.http.routers.xyz-accounts-kratos.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/kratos`)
+      - traefik.http.routers.xyz-accounts-kratos.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-kratos.tls=true
+      - traefik.http.routers.xyz-accounts-kratos.tls.certresolver=lets-encrypt
+      - traefik.http.routers.xyz-accounts-kratos.service=xyz-accounts-kratos
+      - traefik.http.routers.xyz-accounts-kratos.middlewares=xyz-accounts-kratos
+      - traefik.http.services.xyz-accounts-kratos.loadbalancer.server.port=4433
+      - traefik.http.middlewares.xyz-accounts-kratos.stripprefix.prefixes=/kratos
+      - traefik.http.middlewares.xyz-accounts-kratos.stripprefix.forceSlash=false
 
 
   hydra-migrate:
@@ -106,24 +97,6 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.http.routers.xyz-accounts-hydra-admin.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra/admin`)
-      - traefik.http.routers.xyz-accounts-hydra-admin.entrypoints=web, websecure
-      - traefik.http.routers.xyz-accounts-hydra-admin.tls=true
-      - traefik.http.routers.xyz-accounts-hydra-admin.tls.certresolver=lets-encrypt
-      - traefik.http.routers.xyz-accounts-hydra-admin.service=xyz-accounts-hydra-admin
-      - traefik.http.routers.xyz-accounts-hydra-admin.middlewares=xyz-accounts-hydra-admin
-      - traefik.http.services.xyz-accounts-hydra-admin.loadbalancer.server.port=4445
-      - traefik.http.middlewares.xyz-accounts-hydra-admin.stripprefix.prefixes=/hydra/admin
-      - traefik.http.middlewares.xyz-accounts-hydra-admin.stripprefix.forceSlash=false
-      - traefik.http.routers.xyz-accounts-hydra-public.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra/public`)
-      - traefik.http.routers.xyz-accounts-hydra-public.entrypoints=web, websecure
-      - traefik.http.routers.xyz-accounts-hydra-public.tls=true
-      - traefik.http.routers.xyz-accounts-hydra-public.tls.certresolver=lets-encrypt
-      - traefik.http.routers.xyz-accounts-hydra-public.service=xyz-accounts-hydra-public
-      - traefik.http.routers.xyz-accounts-hydra-public.middlewares=xyz-accounts-hydra-public
-      - traefik.http.services.xyz-accounts-hydra-public.loadbalancer.server.port=4444
-      - traefik.http.middlewares.xyz-accounts-hydra-public.stripprefix.prefixes=/hydra/public
-      - traefik.http.middlewares.xyz-accounts-hydra-public.stripprefix.forceSlash=false
       - traefik.http.routers.xyz-accounts-hydra-test.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra/test`)
       - traefik.http.routers.xyz-accounts-hydra-test.entrypoints=web, websecure
       - traefik.http.routers.xyz-accounts-hydra-test.tls=true
@@ -133,6 +106,15 @@ services:
       - traefik.http.services.xyz-accounts-hydra-test.loadbalancer.server.port=5555
       - traefik.http.middlewares.xyz-accounts-hydra-test.stripprefix.prefixes=/hydra/test
       - traefik.http.middlewares.xyz-accounts-hydra-test.stripprefix.forceSlash=false
+      - traefik.http.routers.xyz-accounts-hydra.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra`)
+      - traefik.http.routers.xyz-accounts-hydra.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-hydra.tls=true
+      - traefik.http.routers.xyz-accounts-hydra.tls.certresolver=lets-encrypt
+      - traefik.http.routers.xyz-accounts-hydra.service=xyz-accounts-hydra
+      - traefik.http.routers.xyz-accounts-hydra.middlewares=xyz-accounts-hydra
+      - traefik.http.services.xyz-accounts-hydra.loadbalancer.server.port=4444
+      - traefik.http.middlewares.xyz-accounts-hydra.stripprefix.prefixes=/hydra
+      - traefik.http.middlewares.xyz-accounts-hydra.stripprefix.forceSlash=false
 
 
   postgres:

@@ -61,9 +61,9 @@ urls:
     url: http://kratos:4434
 
   self:
-    public: https://accounts.thielker.xyz/hydra/public
+    public: https://accounts.thielker.xyz/hydra
     admin: https://accounts.thielker.xyz/hydra/admin
-    issuer: https://accounts.thielker.xyz/hydra/public
+    issuer: https://accounts.thielker.xyz/hydra
 
 
 #

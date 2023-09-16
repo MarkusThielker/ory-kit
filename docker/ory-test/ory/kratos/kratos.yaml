@@ -22,7 +22,7 @@ dsn: postgres://postgres:postgres@postgres:5432/kratos?sslmode=disable&max_conns
 #
 serve:
   public:
-    base_url: https://accounts.thielker.xyz/kratos/public
+    base_url: https://accounts.thielker.xyz/kratos
     cors:
       enabled: true
       allowed_origins:
