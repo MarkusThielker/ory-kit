@@ -12,6 +12,7 @@ All UI components are written in Svelte and Typescript, and styled using Tailwin
 Start the backend services using Docker Compose:
 
 ```bash
+cp /docker/ory-dev/.env.example /docker/ory-dev/.env
 docker compose -f docker/ory-dev/docker-compose.yaml up -d
 sh docker/ory-dev/hydra-setup.sh # creates an OAuth2 client (test the consent flow on http://localhost:5555)
 ```
@@ -20,11 +21,14 @@ Then start the authentication UI using npm:
 
 ```bash
 cd authentication
+cp .env.example .env
 npm install
 npm run dev
 ```
 
-Yet, there is no deployment setup. The UI nodes only run in dev mode for now.
+## Deployment
+
+soon.
 
 ## Authentication UI
 
