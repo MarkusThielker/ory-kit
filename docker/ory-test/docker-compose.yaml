@@ -5,6 +5,8 @@ services:
     image: ory-auth-test:latest
     ports:
       - 127.0.0.1:4422:3000
+    env_file:
+      - .env
     networks:
       - intranet
       - web
