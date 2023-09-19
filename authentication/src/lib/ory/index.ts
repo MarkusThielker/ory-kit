@@ -2,10 +2,11 @@ import {
     Configuration,
     FrontendApi,
 } from "@ory/client";
+import { env } from "$env/dynamic/public";
 
 export const frontendApi = new FrontendApi(new Configuration(
     {
-        basePath: "http://localhost:4433",
+        basePath: env.PUBLIC_KRATOS_PUBLIC_API,
         baseOptions: {
             withCredentials: true,
         },
