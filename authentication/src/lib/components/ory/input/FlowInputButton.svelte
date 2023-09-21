@@ -10,6 +10,14 @@
     name={attributes.name}
     type="button"
     value={attributes.value}
+    on:click={(e) => {
+        if (attributes.onclick) {
+            e.stopPropagation()
+            e.preventDefault()
+            const run = new Function(attributes.onclick);
+            run();
+        }
+    }}
 >
     {node.meta.label?.text ?? "Submit"}
 </button>
