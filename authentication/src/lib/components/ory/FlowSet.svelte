@@ -4,6 +4,7 @@
     import FlowImage from "$lib/components/ory/FlowImage.svelte";
     import FlowText from "$lib/components/ory/FlowText.svelte";
     import FlowInput from "$lib/components/ory/input/FlowInput.svelte";
+    import FlowScript from "./FlowScript.svelte";
 
     export let nodes: Array<UiNode>;
 </script>
@@ -19,7 +20,7 @@
         {:else if node.type === UiNodeTypeEnum.A}
             <!-- <FlowA {node} /> -->
         {:else if node.type === UiNodeTypeEnum.Script}
-            <!-- <FlowScript {node} /> -->
+            <FlowScript {node} />
         {:else}
             Unknown node type: {node.attributes.type}
         {/if}
