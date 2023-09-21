@@ -1,10 +1,10 @@
-username=markus
-server=server.thielker.xyz
-path="~/xyz/accounts"
-image=ory-auth-test
-environment=test
-version=${1:-"0.1.0"}
-platform=linux/amd64
+username=markus # username on server
+server=server.thielker.xyz # url or ip of server
+path="~/xyz/accounts" # path on server
+image=ory-auth-test # name of docker image
+environment=test # the directory to copy the configuration from (test -> ../docker/ory-test)
+version=${1:-"0.1.0"} # version of the docker image
+platform=linux/amd64 # platform to build for
 
 # build image and export to tar
 docker build --platform "$platform" --no-cache -t "$image":"$version" .

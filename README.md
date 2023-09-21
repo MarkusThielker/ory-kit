@@ -28,7 +28,21 @@ npm run dev
 
 ## Deployment
 
-soon.
+Deploying the authentication Node on your server is relativly easy. Everything is prepared and the required steps to take are as few as possible. Just follow the steps below.
+
+1. Clone this repository to your development machine.
+2. Replace all occurences of "accounts.thielker.xyz" with your domain.
+3. Copy the .env.example file in /docker/ory-test/ to .env. Make sure the domains were changed in step 2.
+4. Configure the CORS rules in /docker/ory-test/ory/kratos/kratos.yaml and /docker/ory-test/ory/hydra/hydra.yaml.
+5. Configure the cookies in in /docker/ory-test/ory/kratos/kratos.yaml and /docker/ory-test/ory/hydra/hydra.yaml.
+
+Thats everything you need to change in the configurations. Make sure that all changes are only inside docker/ory-test/.
+To actually deploy the project, you need to have Docker and Docker Compose installed on your server.
+
+1. Open the /authentication/deploy.sh script and change the variables at the top to your needs.
+2. Execute the script on your local development machine.
+
+The script will build the docker image for the authentication UI, export it as a tar file, copy it with all required configurations and the docker-compose.yaml to your server and import it there. Then it will start the docker containers on your server.
 
 ## Authentication UI
 
