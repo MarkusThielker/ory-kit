@@ -6,6 +6,7 @@
     import { page } from "$app/stores";
     import type { LoginFlow } from "@ory/client";
     import identity from "$lib/stores/identity";
+    import { browser } from "$app/environment";
 
     let promise: Promise<LoginFlow>;
     if (get(page).url.searchParams.get("flow")) {
@@ -13,7 +14,7 @@
             .getLoginFlow({ id: get(page).url.searchParams.get("flow")! })
             .then((it) => it.data);
 
-        if ($identity) {
+        if ($identity && browser) {
             window.location.replace("/");
         }
     } else {

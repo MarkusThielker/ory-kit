@@ -5,6 +5,25 @@ It implements the dynamic flow system, used by Kratos, to render the required in
 
 It also implements the consent screen for the Ory Hydra consent flow.
 
+## Getting started
+
+To get started, clone this repository and start the backend services as described in the Docker README. 
+
+Then, install the dependencies and start the development server:
+
+```bash
+# install dependencies
+npm install
+
+# use the example environment for development
+cp .env.example .env
+
+# start the development server
+npm run dev
+```
+
+This starts the authentication UI on port 4422. You can access it at http://localhost:4422.
+
 ## Dynamic Flows
 
 Ory Kratos uses a unique approach to handle user flows, such as registration, login, and profile updates. 

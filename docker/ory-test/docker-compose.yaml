@@ -1,0 +1,162 @@
+services:
+
+  authentication:
+    container_name: auth-ui
+    image: ory-auth-test:latest
+    ports:
+      - 127.0.0.1:4422:3000
+    env_file:
+      - .env
+    networks:
+      - intranet
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.xyz-accounts-auth.rule=Host(`accounts.thielker.xyz`)
+      - traefik.http.routers.xyz-accounts-auth.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-auth.tls=true
+      - traefik.http.routers.xyz-accounts-auth.tls.certresolver=lets-encrypt
+
+  kratos-migrate:
+    container_name: kratos-migrate
+    image: oryd/kratos:v1.0.0
+    volumes:
+      - ./ory/kratos:/etc/config/kratos
+      - kratos-data:/home/ory
+      - kratos-data:/var/lib/sqlite
+    command: -c /etc/config/kratos/kratos.yaml migrate sql -e --yes
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - intranet
+
+
+  kratos:
+    container_name: kratos
+    image: oryd/kratos:v1.0.0
+    ports:
+      - 127.0.0.1:4433:4433 # public
+      - 127.0.0.1:4434:4434 # admin
+    volumes:
+      - ./ory/kratos:/etc/config/kratos
+      - kratos-data:/home/ory
+      - kratos-data:/var/lib/sqlite
+    command: serve -c /etc/config/kratos/kratos.yaml --dev --watch-courier
+    depends_on:
+      kratos-migrate:
+        condition: service_completed_successfully
+    networks:
+      - intranet
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.xyz-accounts-kratos.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/kratos`)
+      - traefik.http.routers.xyz-accounts-kratos.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-kratos.tls=true
+      - traefik.http.routers.xyz-accounts-kratos.tls.certresolver=lets-encrypt
+      - traefik.http.routers.xyz-accounts-kratos.service=xyz-accounts-kratos
+      - traefik.http.routers.xyz-accounts-kratos.middlewares=xyz-accounts-kratos
+      - traefik.http.services.xyz-accounts-kratos.loadbalancer.server.port=4433
+      - traefik.http.middlewares.xyz-accounts-kratos.stripprefix.prefixes=/kratos
+      - traefik.http.middlewares.xyz-accounts-kratos.stripprefix.forceSlash=false
+
+
+  hydra-migrate:
+    container_name: hydra-migrate
+    image: oryd/hydra:v2.2.0
+    volumes:
+      - ./ory/hydra:/etc/config/hydra
+      - hydra-data:/home/ory
+      - hydra-data:/var/lib/sqlite
+    command: migrate -c /etc/config/hydra/hydra.yaml sql -e --yes
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - intranet
+
+
+  hydra:
+    container_name: hydra
+    image: oryd/hydra:v2.2.0
+    ports:
+      - 127.0.0.1:4444:4444 # public
+      - 127.0.0.1:4445:4445 # admin
+      - 127.0.0.1:5555:5555 # port for hydra token user
+    volumes:
+      - ./ory/hydra:/etc/config/hydra
+      - hydra-data:/home/ory
+      - hydra-data:/var/lib/sqlite
+    command: serve -c /etc/config/hydra/hydra.yaml all --dev
+    depends_on:
+      hydra-migrate:
+        condition: service_completed_successfully
+    networks:
+      - intranet
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.xyz-accounts-hydra-test.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra/test`)
+      - traefik.http.routers.xyz-accounts-hydra-test.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-hydra-test.tls=true
+      - traefik.http.routers.xyz-accounts-hydra-test.tls.certresolver=lets-encrypt
+      - traefik.http.routers.xyz-accounts-hydra-test.service=xyz-accounts-hydra-test
+      - traefik.http.routers.xyz-accounts-hydra-test.middlewares=xyz-accounts-hydra-test
+      - traefik.http.services.xyz-accounts-hydra-test.loadbalancer.server.port=5555
+      - traefik.http.middlewares.xyz-accounts-hydra-test.stripprefix.prefixes=/hydra/test
+      - traefik.http.middlewares.xyz-accounts-hydra-test.stripprefix.forceSlash=false
+      - traefik.http.routers.xyz-accounts-hydra.rule=Host(`accounts.thielker.xyz`) && PathPrefix(`/hydra`)
+      - traefik.http.routers.xyz-accounts-hydra.entrypoints=web, websecure
+      - traefik.http.routers.xyz-accounts-hydra.tls=true
+      - traefik.http.routers.xyz-accounts-hydra.tls.certresolver=lets-encrypt
+      - traefik.http.routers.xyz-accounts-hydra.service=xyz-accounts-hydra
+      - traefik.http.routers.xyz-accounts-hydra.middlewares=xyz-accounts-hydra
+      - traefik.http.services.xyz-accounts-hydra.loadbalancer.server.port=4444
+      - traefik.http.middlewares.xyz-accounts-hydra.stripprefix.prefixes=/hydra
+      - traefik.http.middlewares.xyz-accounts-hydra.stripprefix.forceSlash=false
+
+
+  postgres:
+    container_name: postgres
+    image: postgres:15.2
+    ports:
+      - 127.0.0.1:4455:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres:/docker-entrypoint-initdb.d/
+    networks:
+      - intranet
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_DB: "kratos"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+
+
+  mailslurper:
+    container_name: mailslurper
+    image: oryd/mailslurper:latest-smtps
+    ports:
+      - 127.0.0.1:4436:4436
+      - 127.0.0.1:4437:4437
+    networks:
+      - intranet
+
+
+networks:
+  intranet:
+  web:
+    external: true
+
+
+volumes:
+  kratos-data:
+  hydra-data:
+  postgres-data:

@@ -6,6 +6,9 @@ Starting this project in a container makes testing it really easy. \
 # move to the environment you want to start (here development)
 cd ory-dev
 
+# use the example environment for development
+cp .env.example .env
+
 # execute the docker compose file
 docker compose up -d
 
@@ -14,6 +17,7 @@ sh ./hydra-setup.sh
 ```
 
 This command will start up multiple containers in the background.
+Then continue with starting the authentication UI development server as described in the authentication README.
 
 ## Services and Ports
 
