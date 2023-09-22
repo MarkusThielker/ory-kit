@@ -12,7 +12,6 @@
         
         if (browser) {
             script.async = true
-            script.setAttribute("data-testid", `node/script/${attributes.id}`)
             script.src = attributes.src
             script.async = attributes.async
             script.crossOrigin = attributes.crossorigin
