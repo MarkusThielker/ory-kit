@@ -55,14 +55,6 @@ selfservice:
       enabled: true
       config:
         issuer: ORY Template
-    webauthn:
-      enabled: true
-      config:
-        passwordless: false
-        rp:
-          id: localhost
-          origin: http://localhost:4422
-          display_name: ORY Template
     lookup_secret:
       enabled: true
 
