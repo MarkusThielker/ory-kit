@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-white dark:bg-neutral-900 text-indigo-900 dark:text-white p-16 duration-300;
+    @apply bg-white dark:bg-neutral-900 text-indigo-900 dark:text-white fill-indigo-900 dark:fill-white p-4 pt-16 duration-300;
 }
 
 .rounded-shape {
@@ -22,7 +22,7 @@ body {
 }
 
 .heading {
-    @apply text-2xl font-semibold;
+    @apply text-3xl font-semibold;
 }
 
 .card {
