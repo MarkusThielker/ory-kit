@@ -32,9 +32,10 @@ Deploying the authentication Node on your server is relativly easy. Everything i
 
 1. Clone this repository to your development machine.
 2. Replace all occurences of "accounts.thielker.xyz" with your domain.
-3. Copy the .env.example file in /docker/ory-test/ to .env. Make sure the domains were changed in step 2.
-4. Configure the CORS rules in /docker/ory-test/ory/kratos/kratos.yaml and /docker/ory-test/ory/hydra/hydra.yaml.
-5. Configure the cookies in in /docker/ory-test/ory/kratos/kratos.yaml and /docker/ory-test/ory/hydra/hydra.yaml.
+3. Copy the .env.example file in `/docker/ory-test/` to .env. Make sure the domains were changed in step 2.
+4. Configure the CORS rules in `/docker/ory-test/ory/kratos/kratos.yaml` and `/docker/ory-test/ory/hydra/hydra.yaml`.
+5. Configure the cookies in in `/docker/ory-test/ory/kratos/kratos.yaml` and `/docker/ory-test/ory/hydra/hydra.yaml`.
+6. Configure the WebAuthn ID in `/docker/ory-test/ory/kratos/kratos.yaml`. This has to be the top level domain, where the authentication UI will be hosted.
 
 Thats everything you need to change in the configurations. Make sure that all changes are only inside docker/ory-test/.
 To actually deploy the project, you need to have Docker and Docker Compose installed on your server.

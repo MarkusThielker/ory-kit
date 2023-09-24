@@ -71,9 +71,8 @@ selfservice:
       config:
         passwordless: false
         rp:
-          id: localhost
-          origins:
-            - https://accounts.thielker.xyz
+          id: thielker.xyz
+          origin: https://accounts.thielker.xyz
           display_name: Thielker SSO
     lookup_secret:
       enabled: true
