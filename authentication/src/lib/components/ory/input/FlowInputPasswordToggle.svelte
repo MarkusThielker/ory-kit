@@ -9,7 +9,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg
-    class="password-visibility-toggle w-4 h-4 fill-indigo-900 dark:fill-white {classNames}"
+    class="password-visibility-toggle w-4 h-4 {classNames}"
     on:click={toggleVisibility}
     role="button"
     tabindex="0"

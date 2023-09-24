@@ -5,4 +5,4 @@
     const attributes = node.attributes as UiNodeImageAttributes;
 </script>
 
-<img alt={node.meta.label?.text} class="w-56 h-56" src={attributes.src} />
+<img alt={node.meta.label?.text} class="w-56 h-56 rounded-shape" src={attributes.src} />
