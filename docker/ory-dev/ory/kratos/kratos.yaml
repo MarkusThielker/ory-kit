@@ -61,8 +61,7 @@ selfservice:
         passwordless: false
         rp:
           id: localhost
-          origins:
-            - http://localhost:4422
+          origin: http://localhost:4422
           display_name: ORY Template
     lookup_secret:
       enabled: true

@@ -5,7 +5,7 @@ code_client=$(docker compose exec hydra \
     --response-type code,id_token \
     --format json \
     --scope openid --scope offline \
-    --name OAuth2 Client \
+    --name "OAuth2 Client" \
     --redirect-uri https://git.thielker.xyz \
     --redirect-uri https://finances.thielker.xyz \
     --redirect-uri https://accounts.thielker.xyz)
