@@ -5,6 +5,7 @@ image=ory-auth-test # name of docker image
 environment=test # the directory to copy the configuration from (test -> ../docker/ory-test)
 version=${1:-"0.1.0"} # version of the docker image
 platform=linux/amd64 # platform to build for
+restart="authentication kratos" # docker containers to restart on deployment
 
 # build image and export to tar
 docker build --platform "$platform" --no-cache -t "$image":"$version" .
@@ -17,7 +18,7 @@ scp -r ../docker/ory-"$environment"/* "$username"@"$server":"$path"
 scp -r ../docker/ory-"$environment"/.env "$username"@"$server":"$path"
 
 # execute remote script on server
-ssh "$username"@"$server" "bash -s" < ./deploy-remote.sh "$image" "$version" "$path"
+ssh "$username"@"$server" "bash -s" < ./deploy-remote.sh "$image" "$version" "$path" "$restart"
 
 # clean up files
 rm -rf "$image"-"$version".tar.gz
