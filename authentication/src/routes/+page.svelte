@@ -4,6 +4,7 @@
     import { t } from "$lib/i18n";
     import type { Identity } from "@ory/client";
     import { frontendApi } from "$lib/ory";
+    import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
 
     const identity: Identity | null = get(identityStore);
 </script>
@@ -29,15 +30,7 @@
             <a href="/flow/settings" class="btn-primary w-full">
                 {$t("page.settings.title")}
             </a>
-            {#await frontendApi.createBrowserLogoutFlow() then flow}
-                <a
-                    href={flow.data.logout_url}
-                    data-sveltekit-preload-data="tap"
-                    class="btn-secondary w-full"
-                >
-                    {$t("page.logout.title")}
-                </a>
-            {/await}
+            <LogoutButton />
         {/if}
     </div>
 </div>
