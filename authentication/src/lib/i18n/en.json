@@ -42,7 +42,8 @@
       "title": "WebAuthn"
     },
     "lookup_secret": {
-      "title": "Recovery codes"
+      "title": "Recovery codes",
+      "used": "Used"
     }
   },
   "verification": {

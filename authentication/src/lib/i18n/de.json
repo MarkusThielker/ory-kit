@@ -42,7 +42,8 @@
       "title": "WebAuthn"
     },
     "lookup_secret": {
-      "title": "Wiederherstellungscodes"
+      "title": "Wiederherstellungscodes",
+      "used": "Verwendet"
     }
   },
   "verification": {
