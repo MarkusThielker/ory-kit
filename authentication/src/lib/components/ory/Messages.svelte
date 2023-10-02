@@ -26,7 +26,6 @@
                     message
                 )}"
             >
-                <strong class="uppercase">{message.type}</strong>
                 <p>{$t(`page.ory.${message.id}`, message.context)}</p>
             </div>
         {/each}
