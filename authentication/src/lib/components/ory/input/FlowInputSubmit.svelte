@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { t, fromNode } from "$lib/i18n";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
 
     export let node: UiNode;
@@ -11,5 +12,5 @@
     type="submit"
     value={attributes.value}
 >
-    {node.meta.label?.text ?? "Submit"}
+    {$t(fromNode(node), node.meta.label?.context)}
 </button>

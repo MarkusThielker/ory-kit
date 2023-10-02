@@ -10,7 +10,7 @@
         "email": {
           "type": "string",
           "format": "email",
-          "title": "Email",
+          "title": "email",
           "ory.sh/kratos": {
             "credentials": {
               "password": {
@@ -30,7 +30,7 @@
         },
         "username": {
           "type": "string",
-          "title": "Username",
+          "title": "username",
           "minLength": 3,
           "maxLength": 16,
           "ory.sh/kratos": {
@@ -42,12 +42,12 @@
           }
         },
         "name": {
-          "title": "Name",
+          "title": "name",
           "type": "string",
           "maxLength": 32
         },
         "description": {
-          "title": "Description",
+          "title": "description",
           "type": "string",
           "maxLength": 128
         }

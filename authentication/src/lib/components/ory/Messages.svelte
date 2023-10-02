@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { t } from "$lib/i18n";
     import { UiTextTypeEnum, type Message, type UiText } from "@ory/client";
 
     export let messages: UiText[] | Message[] | undefined;
@@ -26,7 +27,7 @@
                 )}"
             >
                 <strong class="uppercase">{message.type}</strong>
-                <p>{message.text}</p>
+                <p>{$t(`page.ory.${message.id}`, message.context)}</p>
             </div>
         {/each}
     {/if}

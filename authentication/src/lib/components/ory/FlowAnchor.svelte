@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { t } from "$lib/i18n";
     import type { UiNode, UiNodeAnchorAttributes } from "@ory/client";
 
     export let node: UiNode;
@@ -11,5 +12,5 @@
         e.preventDefault()
         window.location.href = attributes.href
     }}>
-{attributes.title.text}
+    {$t(`ory.${attributes.title?.id}`, attributes.title.context)}
 </button>
