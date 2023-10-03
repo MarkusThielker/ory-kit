@@ -56,10 +56,12 @@ The authentication UI is already implemented and working. It supports all self-s
 ### Next steps
 
 The foundation is laid out, but there is still a lot of work to do. The next steps are:
-- Add a deployment setup
-- Add a sample using the OAuth2 client for authentication
-- Improve styling and make layout responsive
-- Add support for more languages
+- Finish the authentication UI
+- Add OpenID Connect sample
+- Add Keto and Oathkeeper to the docker setup
+- Start working on the admin UI
+
+If you want more specific information about the next steps, take a look at the [issues](https://github.com/markusthielker/ory-kit/issues).
 
 ## Admin UI
 

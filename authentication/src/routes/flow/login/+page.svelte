@@ -44,46 +44,46 @@
 
 <div class="space-y-8">
     {#await promise then flow}
+        <Flow
+            ui={flow.ui}
+            title={$t("page.login.title")}
+            groups={["password"]}
+            messages={flow.ui.messages}
+        />
+
+        {#if flow.requested_aal === "aal2" || flow.requested_aal === "aal3"}
             <Flow
                 ui={flow.ui}
-                title={$t("page.login.title")}
-                groups={["password"]}
+                title={$t("page.settings.totp.title")}
+                groups={["totp"]}
                 messages={flow.ui.messages}
             />
 
-            {#if flow.requested_aal === "aal2" || flow.requested_aal === "aal3"}
-                <Flow
-                    ui={flow.ui}
-                    title={$t("page.settings.totp.title")}
-                    groups={["totp"]}
-                    messages={flow.ui.messages}
-                />
+            <Flow
+                ui={flow.ui}
+                title={$t("page.settings.webauthn.title")}
+                groups={["webauthn"]}
+                messages={flow.ui.messages}
+            />
 
-                <Flow
-                    ui={flow.ui}
-                    title={$t("page.settings.webauthn.title")}
-                    groups={["webauthn"]}
-                    messages={flow.ui.messages}
-                />
+            <Flow
+                ui={flow.ui}
+                title={$t("page.settings.lookup_secret.title")}
+                groups={["lookup_secret"]}
+                messages={flow.ui.messages}
+            />
 
-                <Flow
-                    ui={flow.ui}
-                    title={$t("page.settings.lookup_secret.title")}
-                    groups={["lookup_secret"]}
-                    messages={flow.ui.messages}
-                />
+            {#await frontendApi.createBrowserLogoutFlow() then flow}
+                <div class="flex card">
+                    <LogoutButton />
+                </div>
+            {/await}
+        {/if}
 
-                {#await frontendApi.createBrowserLogoutFlow() then flow}
-                    <div class="flex card">
-                        <LogoutButton />
-                    </div>
-                {/await}
-            {/if}
-
-            {#if flow.requested_aal === "aal1"}
-                <div class="alternative-actions">
-                    <a href="/flow/recovery">{$t("page.login.forgot")}</a>
-                    <a href="/flow/registration">{$t("page.login.registration")}</a>
+        {#if flow.requested_aal === "aal1"}
+            <div class="alternative-actions">
+                <a href="/flow/recovery">{$t("page.login.forgot")}</a>
+                <a href="/flow/registration">{$t("page.login.registration")}</a>
             </div>
         {/if}
     {/await}

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { t, fromNode } from "$lib/i18n";
     import Messages from "$lib/components/ory/Messages.svelte";
     import PasswordToggle from "$lib/components/ory/input/FlowInputPasswordToggle.svelte";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
@@ -11,13 +12,13 @@
 
 <fieldset>
     <label class="flex flex-col">
-        <span>{node.meta.label?.text}</span>
+        <span>{$t(fromNode(node), node.meta.label?.context)}</span>
         <span class="inline-flex items-center">
             <input
                 class="text-input"
                 disabled={attributes.disabled}
                 name={attributes.name}
-                placeholder={node.meta.label?.text}
+                placeholder={$t(fromNode(node), node.meta.label?.context)}
                 required={attributes.required}
                 type={isHidden ? "password" : "text"}
                 value={attributes.value ?? ""}

@@ -16,7 +16,7 @@
 <div class="space-y-8">
     <div class="card space-y-2">
 
-        <p>{$t('page.consent.description', { name: identity?.traits?.name ?? identity?.traits?.username, client: data.oauth2ConsentRequest?.client?.client_name ?? "" })}</p>
+        <p>{$t("page.consent.description", { name: identity?.traits?.name ?? identity?.traits?.username, client: data.oauth2ConsentRequest?.client?.client_name ?? "" })}</p>
 
         <ul>
             {#each data.oauth2ConsentRequest?.requested_scope ?? [] as scope}

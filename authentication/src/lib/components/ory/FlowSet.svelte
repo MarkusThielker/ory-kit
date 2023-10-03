@@ -23,7 +23,7 @@
         {:else if node.type === UiNodeTypeEnum.Script}
             <FlowScript {node} />
         {:else}
-            Unknown node type: {node.attributes.type}
+            Unknown node type: {node.type}
         {/if}
     {/each}
 </div>
