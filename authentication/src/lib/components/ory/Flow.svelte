@@ -15,7 +15,7 @@
     );
 
     // only show flow if there are non-default nodes
-    $: showFlow = nodes.find((node: UiNode) => node.group !== "default");
+    $: showFlow = nodes.find((node: UiNode) => node.group !== "default")
 </script>
 
 {#if showFlow}

@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-3 gap-2">
         {#each attributes.text.context?.secrets as code}
-            <code class="bg-neutral-200 dark:bg-neutral-700 rounded-md px-2 py-1 text-center">{ code.id === 1050014 ? $t('page.settings.lookup_secret.used') : code.context.secret}</code>
+            <code class="bg-neutral-200 dark:bg-neutral-700 rounded-md px-2 py-1 text-center">{ code.id === 1050014 ? $t("page.settings.lookup_secret.used") : code.context.secret}</code>
         {/each}
     </div>
 
