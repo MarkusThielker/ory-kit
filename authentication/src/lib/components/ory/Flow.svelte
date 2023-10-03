@@ -3,10 +3,10 @@
     import Messages from "$lib/components/ory/Messages.svelte";
     import type { Message, UiContainer, UiNode, UiText } from "@ory/client";
 
-    export let ui: UiContainer;
-    export let title: string = "";
-    export let groups: string[] = [];
-    export let messages: UiText[] | Message[] | undefined;
+    export let ui: UiContainer
+    export let title: string = ""
+    export let groups: string[] = []
+    export let messages: UiText[] | Message[] | undefined = undefined
 
     groups = ["default", ...groups];
     let nodes = ui.nodes.filter((node: UiNode) =>

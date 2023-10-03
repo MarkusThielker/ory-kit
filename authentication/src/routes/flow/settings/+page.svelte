@@ -7,6 +7,7 @@
     import { onMount } from "svelte";
     import type { SettingsFlow } from "@ory/client";
     import identity from "$lib/stores/identity";
+    import Messages from "$lib/components/ory/Messages.svelte";
 
     let promise: Promise<SettingsFlow>;
     if (get(page).url.searchParams.get("flow")) {
@@ -30,39 +31,41 @@
 
 <div class="space-y-8">
     {#await promise then flow}
+
+        <div class="max-w-lg mx-auto">
+            {#if flow.ui.messages}
+                <Messages messages={flow.ui.messages} />
+            {/if}
+        </div>
+
         <Flow
             ui={flow.ui}
             title={$t("page.settings.profile.title")}
             groups={["profile"]}
-            messages={flow.ui.messages}
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.password.title")}
             groups={["password"]}
-            messages={flow.ui.messages}
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.totp.title")}
             groups={["totp"]}
-            messages={flow.ui.messages}
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.webauthn.title")}
             groups={["webauthn"]}
-            messages={flow.ui.messages}
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.lookup_secret.title")}
             groups={["lookup_secret"]}
-            messages={flow.ui.messages}
         />
     {/await}
 </div>
