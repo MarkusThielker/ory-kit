@@ -87,7 +87,7 @@ a {
 }
 
 .alert {
-    @apply theme-container relative rounded-shape;
+    @apply theme-container;
 }
 
 .alert-success {
