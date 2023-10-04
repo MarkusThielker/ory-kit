@@ -26,10 +26,19 @@
 </script>
 
 <svelte:head>
-    <title>{$t("page.settings.title")}</title>
+    <title>{$t("page.settings.title")} - {$t("page.settings.profile.title")}</title>
 </svelte:head>
 
 <div class="space-y-8">
+
+    <div class="card grid grid-cols-2 text-center">
+
+        <a href="/flow/settings" class="text-xl font-semibold">{$t("page.settings.profile.title")}</a>
+
+        <a href="/flow/settings/sessions" class="text-xl">{$t("page.settings.sessions.title")}</a>
+
+    </div>
+
     {#await promise then flow}
 
         <div class="max-w-lg mx-auto">

@@ -32,6 +32,9 @@
     "profile": {
       "title": "Profil"
     },
+    "sessions": {
+      "title": "Sessions",
+    },
     "password": {
       "title": "Passwort ändern"
     },
