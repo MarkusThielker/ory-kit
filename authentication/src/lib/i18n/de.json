@@ -34,6 +34,7 @@
     },
     "sessions": {
       "title": "Sessions",
+      "revoke_all": "Alle widerrufen",
     },
     "password": {
       "title": "Passwort ändern"
