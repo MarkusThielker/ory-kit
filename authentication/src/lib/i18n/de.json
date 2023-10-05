@@ -34,6 +34,9 @@
     },
     "sessions": {
       "title": "Sessions",
+      "device_info": "{{browser}} auf {{os}}",
+      "sign_in": "Angemeldet am {{date}}",
+      "revoke": "Widerrufen",
       "revoke_all": "Alle widerrufen",
     },
     "password": {
