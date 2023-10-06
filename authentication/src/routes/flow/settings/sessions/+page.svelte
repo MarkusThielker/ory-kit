@@ -13,6 +13,42 @@
         }
     });
 
+    function parseUserAgent(session: Session|undefined): { browser: string; os: string } {
+
+        let browser = t.get("page.settings.sessions.unknown_browser");
+        let os = t.get("page.settings.sessions.unknown_os");
+
+        if (session !== undefined && session.devices && session.devices.length > 0) {
+
+            let ua = session.devices[0].user_agent as string; 
+
+            if (ua.includes("Edge")) {
+                browser = "Edge";
+            } else if (ua.includes("Chrome") && !ua.includes("Chromium")) {
+                browser = "Chrome";
+            } else if (ua.includes("Safari") && !ua.includes("Chrome") && !ua.includes("Chromium")) {
+                browser = "Safari";
+            } else if (ua.includes("Firefox") && !ua.includes("Seamonkey") && !ua.includes("Chrome") && !ua.includes("Safari")) {
+                browser = "Firefox";
+            } else if (ua.includes("MSIE") || ua.includes("Trident")) {
+                browser = "Internet Explorer";
+            }
+
+            if (ua.includes("Windows NT")) {
+                os = "Windows"
+            } else if (ua.includes("Mac OS X")) {
+                os = "Mac OS X"
+            } else if (ua.includes("Linux")) {
+                os = "Linux"
+            } else if (ua.includes("Android")) {
+                os = "Android"
+            } else if (ua.includes("iPhone") || ua.includes("iPad")) {
+                os = "iOS"
+            }    
+        }    
+
+        return { browser, os }
+    }
 </script>
 
 <svelte:head>
@@ -51,6 +87,7 @@
                             {#each session.devices as device}
                                 <div class="w-full">
                                     <p>{device.ip_address}</p>
+                                    <p>{$t("page.settings.sessions.device_info", parseUserAgent(session))}</p>
                                     {#if session.authenticated_at}
                                         <p>{$t("page.settings.sessions.sign_in", { date: new Date(session.authenticated_at).toLocaleString() })}</p>
                                     {/if}

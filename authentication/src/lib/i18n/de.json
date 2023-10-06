@@ -38,6 +38,8 @@
       "sign_in": "Angemeldet am {{date}}",
       "revoke": "Widerrufen",
       "revoke_all": "Alle widerrufen",
+      "unknown_browser": "Unbekannter Browser",
+      "unknown_os": "Unbekanntes Betriebssystem"
     },
     "password": {
       "title": "Passwort ändern"
