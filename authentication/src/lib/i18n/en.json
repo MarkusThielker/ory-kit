@@ -32,6 +32,15 @@
     "profile": {
       "title": "Profile"
     },
+    "sessions": {
+      "title": "Sessions",
+      "device_info": "{{browser}} on {{os}}",
+      "sign_in": "Signed in at {{date}}",
+      "revoke": "Revoke",
+      "revoke_all": "Revoke all",
+      "unknown_browser": "Unknown browser",
+      "unknown_os": "Unknown operating system"
+    },
     "password": {
       "title": "Update password"
     },
