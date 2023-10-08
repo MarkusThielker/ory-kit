@@ -8,6 +8,7 @@
     import identity from "$lib/stores/identity";
     import { browser } from "$app/environment";
     import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
+    import Messages from "$lib/components/ory/Messages.svelte";
 
     let promise: Promise<LoginFlow>;
     if (get(page).url.searchParams.get("flow")) {
@@ -52,25 +53,29 @@
         />
 
         {#if flow.requested_aal === "aal2" || flow.requested_aal === "aal3"}
+
+            <div class="max-w-lg mx-auto">
+                {#if flow.ui.messages}
+                    <Messages messages={flow.ui.messages} />
+                {/if}
+            </div>
+
             <Flow
                 ui={flow.ui}
                 title={$t("page.settings.totp.title")}
                 groups={["totp"]}
-                messages={flow.ui.messages}
             />
 
             <Flow
                 ui={flow.ui}
                 title={$t("page.settings.webauthn.title")}
                 groups={["webauthn"]}
-                messages={flow.ui.messages}
             />
 
             <Flow
                 ui={flow.ui}
                 title={$t("page.settings.lookup_secret.title")}
                 groups={["lookup_secret"]}
-                messages={flow.ui.messages}
             />
 
             {#await frontendApi.createBrowserLogoutFlow() then flow}
