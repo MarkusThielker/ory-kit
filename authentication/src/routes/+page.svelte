@@ -3,7 +3,6 @@
     import identityStore from "$lib/stores/identity";
     import { t } from "$lib/i18n";
     import type { Identity } from "@ory/client";
-    import { frontendApi } from "$lib/ory";
     import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
 
     const identity: Identity | null = get(identityStore);
