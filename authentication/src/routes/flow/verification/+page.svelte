@@ -5,8 +5,6 @@
     import { page } from "$app/stores";
     import type { VerificationFlow } from "@ory/client";
     import { get } from "svelte/store";
-    import { onMount } from "svelte";
-    import identity from "$lib/stores/identity";
 
     let promise: Promise<VerificationFlow>;
     if (get(page).url.searchParams.get("flow")) {
@@ -16,14 +14,8 @@
             })
             .then((it) => it.data);
     } else {
-        promise = frontendApi.createBrowserVerificationFlow().then((it) => it.data);
+        window.location.replace("/");
     }
-
-    onMount(() => {
-        if ($identity) {
-            window.location.replace("/");
-        }
-    });
 </script>
 
 <svelte:head>
