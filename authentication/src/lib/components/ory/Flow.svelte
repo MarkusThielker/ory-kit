@@ -5,10 +5,14 @@
 
     export let ui: UiContainer
     export let title: string = ""
-    export let groups: string[] = []
+    export let group: string | undefined = undefined
     export let messages: UiText[] | Message[] | undefined = undefined
 
-    groups = ["default", ...groups];
+    const groups = ["default"];
+    if (group) { 
+        groups.push(group);
+    }
+    
     let nodes = ui.nodes.filter((node: UiNode) =>
         // If no groups are specified, show all nodes
         groups.length == 1 ? true : groups.includes(node.group)

@@ -50,31 +50,31 @@
         <Flow
             ui={flow.ui}
             title={$t("page.settings.profile.title")}
-            groups={["profile"]}
+            group="profile"
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.password.title")}
-            groups={["password"]}
+            group="password"
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.totp.title")}
-            groups={["totp"]}
+            group="totp"
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.webauthn.title")}
-            groups={["webauthn"]}
+            group="webauthn"
         />
 
         <Flow
             ui={flow.ui}
             title={$t("page.settings.lookup_secret.title")}
-            groups={["lookup_secret"]}
+            group="lookup_secret"
         />
     {/await}
 </div>
