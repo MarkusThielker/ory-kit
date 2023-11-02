@@ -18,7 +18,9 @@ body {
     @apply 
         border
         border-black
-        dark:border-white;
+        dark:border-white
+        disabled:border-black/50
+        disabled:dark:border-white/50;
 }
 
 .heading {
@@ -65,7 +67,11 @@ a {
         hover:bg-black 
         hover:text-white 
         dark:hover:bg-white 
-        dark:hover:text-black;
+        dark:hover:text-black
+        disabled:bg-cyan-200/50
+        disabled:text-cyan-900/50
+        disabled:dark:bg-cyan-200/50
+        disabled:dark:text-cyan-900/50;
 }
 
 .btn-secondary {
@@ -83,7 +89,11 @@ a {
         hover:bg-white 
         hover:text-black 
         dark:hover:bg-white 
-        dark:hover:text-black;
+        dark:hover:text-black
+        disabled:bg-white/50
+        disabled:text-cyan-900/50
+        disabled:dark:bg-neutral-900/50
+        disabled:dark:text-cyan-200/50;
 }
 
 .alert {
