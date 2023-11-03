@@ -96,17 +96,16 @@
 
     {#await promiseListSessions then sessions}
 
-    <div class="max-w-lg mx-auto">
-        <button 
-            class="btn-secondary" 
-            on:click={() => frontendApi.disableMyOtherSessions().then(() => window.location.reload())}>
-                {$t("page.settings.sessions.revoke_all")}
-        </button>
-    </div>
+        <div class="max-w-lg mx-auto">
+            <button 
+                class="btn-secondary" 
+                on:click={() => frontendApi.disableMyOtherSessions().then(() => window.location.reload())}>
+                    {$t("page.settings.sessions.revoke_all")}
+            </button>
+        </div>
 
-    <div class="space-y-4">
+        <div class="space-y-4">
 
-        {#await promise then sessions}
             {#each sessions as session}
                 <div class="card space-y-4">
                     <div class="flex flex-row space-x-4 items-start">
@@ -135,6 +134,6 @@
                     </div>
                 </div>
             {/each}
-        {/await}
-    </div>
+        </div>
+    {/await}
 </div>
