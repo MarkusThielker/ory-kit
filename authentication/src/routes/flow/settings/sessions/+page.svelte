@@ -98,7 +98,8 @@
 
         <div class="max-w-lg mx-auto">
             <button 
-                class="btn-secondary" 
+                class="btn-secondary"
+                disabled={sessions.length == 0}
                 on:click={() => frontendApi.disableMyOtherSessions().then(() => window.location.reload())}>
                     {$t("page.settings.sessions.revoke_all")}
             </button>
