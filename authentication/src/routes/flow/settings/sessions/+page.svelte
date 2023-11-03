@@ -4,8 +4,11 @@
     import { onMount } from "svelte";
     import type { Session } from "@ory/client";
     import identity from "$lib/stores/identity";
+    import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
 
-    let promise: Promise<Session[]> = frontendApi.listMySessions().then((it) => it.data);
+    let promiseCurrentSession: Promise<Session> = frontendApi.toSession().then((it) => it.data);
+
+    let promiseListSessions: Promise<Session[]> = frontendApi.listMySessions().then((it) => it.data);
 
     onMount(() => {
         if (!$identity) {
@@ -65,7 +68,33 @@
 
     </div>
 
-    {#await promise then sessions}
+    {#await promiseCurrentSession then currentSession}  
+        <div class="card space-y-4">
+            <div class="flex flex-row space-x-4 items-start">
+                <svg viewBox="0 0 100 100" class="mt-1 w-4 fill-cyan-200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50"/>
+                </svg>
+
+                <div class="w-full">
+                    <p class="font-semibold text-lg">{$t('page.settings.sessions.this_session')}</p>
+                    <p>{$t("page.settings.sessions.device_info", parseUserAgent(currentSession))}</p>
+                    {#if currentSession.authenticated_at}
+                        <p>{$t("page.settings.sessions.sign_in", { date: new Date(currentSession.authenticated_at).toLocaleString() })}</p>
+                    {/if}
+                </div>
+
+                <div class="flex items-end">
+                    <LogoutButton primary/>
+                </div>
+            </div>
+        </div>
+    {/await}
+
+    <hr class="max-w-lg mx-auto"/>
+
+    <p class="max-w-lg mx-auto text-3xl font-semibold">{$t('page.settings.sessions.other_sessions')}</p>
+
+    {#await promiseListSessions then sessions}
 
         <div class="max-w-lg mx-auto">
             <button 
@@ -77,6 +106,7 @@
         </div>
 
         <div class="space-y-4">
+
             {#each sessions as session}
                 <div class="card space-y-4">
                     <div class="flex flex-row space-x-4 items-start">
