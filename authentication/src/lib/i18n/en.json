@@ -37,9 +37,11 @@
       "device_info": "{{browser}} on {{os}}",
       "sign_in": "Signed in at {{date}}",
       "revoke": "Revoke",
-      "revoke_all": "Revoke all",
+      "revoke_all": "Revoke all other sessions",
       "unknown_browser": "Unknown browser",
-      "unknown_os": "Unknown operating system"
+      "unknown_os": "Unknown operating system",
+      "this_session": "This session",
+      "other_sessions": "Other Sessions"
     },
     "password": {
       "title": "Update password"

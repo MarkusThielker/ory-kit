@@ -37,9 +37,11 @@
       "device_info": "{{browser}} auf {{os}}",
       "sign_in": "Angemeldet am {{date}}",
       "revoke": "Widerrufen",
-      "revoke_all": "Alle widerrufen",
+      "revoke_all": "Alle weiteren Sessions widerrufen",
       "unknown_browser": "Unbekannter Browser",
-      "unknown_os": "Unbekanntes Betriebssystem"
+      "unknown_os": "Unbekanntes Betriebssystem",
+      "this_session": "Diese Session",
+      "other_sessions": "Weitere Sessions"
     },
     "password": {
       "title": "Passwort ändern"
