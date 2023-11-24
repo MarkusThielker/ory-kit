@@ -9,13 +9,13 @@
     export let messages: UiText[] | Message[] | undefined = undefined
 
     const groups = ["default"];
-    if (group) { 
+    if (group) {
+        group === "oidc" && groups.pop();
         groups.push(group);
     }
     
     let nodes = ui.nodes.filter((node: UiNode) =>
-        // If no groups are specified, show all nodes
-        groups.length == 1 ? true : groups.includes(node.group)
+        groups.includes(node.group)
     );
 
     // only show flow if there are non-default nodes
