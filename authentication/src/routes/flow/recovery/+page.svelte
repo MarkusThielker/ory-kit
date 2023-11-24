@@ -32,6 +32,7 @@
     <Flow
         ui={flow.ui}
         title={$t("page.recovery.title")}
+        group="code"
         messages={flow.ui.messages}
     />
 {/await}

@@ -26,6 +26,7 @@
     <Flow
         ui={flow.ui}
         title={$t("page.verification.title")}
+        group="code"
         messages={flow.ui.messages}
     />
 {/await}
