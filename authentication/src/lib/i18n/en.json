@@ -46,6 +46,9 @@
     "password": {
       "title": "Update password"
     },
+    "oidc": {
+      "title": "Social login"
+    },
     "totp": {
       "title": "Two-factor authentication"
     },
@@ -99,8 +102,8 @@
     "1040005": "An email containing a code has been sent to the email address you provided. If you have not received an email, check the spelling of the address and retry the registration.",
     "1040006": "Sign up with code",
     "1050001": "Your changes have been saved!",
-    "1050002": "Link {{provider}}",
-    "1050003": "Unlink {{provider}}",
+    "1050002": "Connect to {{provider}}",
+    "1050003": "Disconnect from {{provider}}",
     "1050004": "Unlink TOTP Authenticator App",
     "1050005": "Authenticator app QR code",
     "1050006": "{{secret}}",

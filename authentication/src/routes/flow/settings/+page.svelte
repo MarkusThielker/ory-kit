@@ -61,6 +61,12 @@
 
         <Flow
             ui={flow.ui}
+            title={$t("page.settings.oidc.title")}
+            group="oidc"
+        />
+
+        <Flow
+            ui={flow.ui}
             title={$t("page.settings.totp.title")}
             group="totp"
         />
