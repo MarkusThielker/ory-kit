@@ -46,6 +46,9 @@
     "password": {
       "title": "Passwort ändern"
     },
+    "oidc": {
+      "title": "Social Login"
+    },
     "totp": {
       "title": "Zwei-Faktor-Authentifizierung"
     },

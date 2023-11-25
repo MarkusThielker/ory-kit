@@ -7,6 +7,7 @@
     import { get } from "svelte/store";
     import { page } from "$app/stores";
     import { frontendApi } from "$lib/ory";
+    import Messages from "$lib/components/ory/Messages.svelte";
 
     let promise: Promise<RegistrationFlow>;
     if (get(page).url.searchParams.get("flow")) {
@@ -30,14 +31,28 @@
     <title>{$t("page.registration.title")}</title>
 </svelte:head>
 
-{#await promise then flow}
-    <Flow
-        ui={flow.ui}
-        title={$t("page.registration.title")}
-        messages={flow.ui.messages}
-    />
+<div class="space-y-8">
+    {#await promise then flow}
 
-    <div class="alternative-actions">
-        <a href="/flow/login">{$t("page.registration.login")}</a>
-    </div>
-{/await}
+        <div class="max-w-lg mx-auto">
+            {#if flow.ui.messages}
+                <Messages messages={flow.ui.messages} />
+            {/if}
+        </div>
+
+        <Flow
+            ui={flow.ui}
+            title={$t("page.registration.title")}
+            group="password"
+        />
+
+        <Flow
+            ui={flow.ui}
+            group="oidc"
+        />
+
+        <div class="alternative-actions">
+            <a href="/flow/login">{$t("page.registration.login")}</a>
+        </div>
+    {/await}
+</div>

@@ -57,6 +57,42 @@ selfservice:
         issuer: ORY Template
     lookup_secret:
       enabled: true
+    oidc:
+      config:
+        providers:
+          - id: Twitch
+            provider: generic
+            client_id: <your_client_id>
+            client_secret: <your_client_secret>
+            mapper_url: file:///etc/config/kratos/twitch.data-mapper.jsonnet
+            issuer_url: https://id.twitch.tv/oauth2
+            token_url: https://id.twitch.tv/oauth2/token
+            scope:
+              - openid
+              - user:read:email
+            requested_claims:
+              id_token:
+                email:
+                  essential: true
+                email_verified:
+                  essential: true
+          - id: Discord
+            provider: discord
+            client_id: <your_client_id>
+            client_secret: <your_client_secret>
+            mapper_url: file:///etc/config/kratos/discord.data-mapper.jsonnet
+            issuer_url: https://discord.com/oauth2
+            token_url: https://discord.com/api/oauth2/token
+            scope:
+              - email
+              - identify
+            requested_claims:
+              id_token:
+                email:
+                  essential: true
+                email_verified:
+                  essential: true
+      enabled: true
 
   flows:
     error:

@@ -45,20 +45,25 @@
 
 <div class="space-y-8">
     {#await promise then flow}
+
+        <div class="max-w-lg mx-auto">
+            {#if flow.ui.messages}
+                <Messages messages={flow.ui.messages} />
+            {/if}
+        </div>
+
         <Flow
             ui={flow.ui}
             title={$t("page.login.title")}
             group="password"
-            messages={flow.ui.messages}
+        />
+
+        <Flow
+            ui={flow.ui}
+            group="oidc"
         />
 
         {#if flow.requested_aal === "aal2" || flow.requested_aal === "aal3"}
-
-            <div class="max-w-lg mx-auto">
-                {#if flow.ui.messages}
-                    <Messages messages={flow.ui.messages} />
-                {/if}
-            </div>
 
             <Flow
                 ui={flow.ui}
@@ -78,11 +83,9 @@
                 group="lookup_secret"
             />
 
-            {#await frontendApi.createBrowserLogoutFlow() then flow}
-                <div class="flex card">
-                    <LogoutButton />
-                </div>
-            {/await}
+            <div class="flex card">
+                <LogoutButton />
+            </div>
         {/if}
 
         {#if flow.requested_aal === "aal1"}
