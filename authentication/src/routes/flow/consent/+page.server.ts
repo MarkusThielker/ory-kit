@@ -24,13 +24,13 @@ export const actions: Actions = {
         const response = await oauthApi.acceptOAuth2ConsentRequest({ 
             consentChallenge: data.get("consentChallenge") as string 
         })
-        throw redirect(303, response.data.redirect_to)
+        redirect(303, response.data.redirect_to);
     },
 	reject: async ({ request }) => {
         const data = await request.formData();
         const response = await oauthApi.rejectOAuth2ConsentRequest({ 
             consentChallenge: data.get("consentChallenge") as string 
         })
-        throw redirect(303, response.data.redirect_to)
+        redirect(303, response.data.redirect_to);
     }
 };
