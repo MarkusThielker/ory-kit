@@ -27,7 +27,7 @@ const config = ({
 export const { t, locale, locales, loading, loadTranslations } = new i18n(config);
 
 export const fromNode = (node: UiNode) => {
-    return 'page.ory.' + (node.meta?.label?.id === 1070002 ? `traits.${node.meta?.label?.text}` : node.meta?.label?.id.toString()) ?? "";
+    return 'page.ory.' + (node.meta?.label?.id === 1070002 ? `traits.${node.meta?.label?.text}` : node.meta?.label?.id.toString());
 };
 
 if (browser) {
