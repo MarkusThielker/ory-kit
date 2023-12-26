@@ -24,7 +24,7 @@
 
 {#await promise then flow}
     <Flow
-        ui={flow.ui}
+        {flow}
         title={$t("page.verification.title")}
         group="code"
         messages={flow.ui.messages}

@@ -41,13 +41,13 @@
         </div>
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.registration.title")}
             group="password"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             group="oidc"
         />
 

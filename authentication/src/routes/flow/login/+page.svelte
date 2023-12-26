@@ -53,32 +53,32 @@
         </div>
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.login.title")}
             group="password"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             group="oidc"
         />
 
         {#if flow.requested_aal === "aal2" || flow.requested_aal === "aal3"}
 
             <Flow
-                ui={flow.ui}
+                {flow}
                 title={$t("page.settings.totp.title")}
                 group="totp"
             />
 
             <Flow
-                ui={flow.ui}
+                {flow}
                 title={$t("page.settings.webauthn.title")}
                 group="webauthn"
             />
 
             <Flow
-                ui={flow.ui}
+                {flow}
                 title={$t("page.settings.lookup_secret.title")}
                 group="lookup_secret"
             />

@@ -30,7 +30,7 @@
 
 {#await promise then flow}
     <Flow
-        ui={flow.ui}
+        {flow}
         title={$t("page.recovery.title")}
         group="code"
         messages={flow.ui.messages}

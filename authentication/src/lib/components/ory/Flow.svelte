@@ -1,11 +1,50 @@
 <script lang="ts">
     import FlowSet from "$lib/components/ory/FlowSet.svelte";
     import Messages from "$lib/components/ory/Messages.svelte";
-    import type { Message, UiContainer, UiNode, UiText } from "@ory/client";
+    import type {
+        LoginFlow,
+        Message,
+        RecoveryFlow,
+        RegistrationFlow,
+        SettingsFlow,
+        UiNode,
+        UiText,
+        UpdateLoginFlowBody,
+        UpdateRecoveryFlowBody,
+        UpdateRegistrationFlowBody,
+        UpdateSettingsFlowBody,
+        UpdateVerificationFlowBody,
+        VerificationFlow
+    } from "@ory/client";
+    import { createEventDispatcher } from "svelte";
 
-    export let ui: UiContainer
+    type Values = Partial<
+        | UpdateLoginFlowBody
+        | UpdateRegistrationFlowBody
+        | UpdateRecoveryFlowBody
+        | UpdateSettingsFlowBody
+        | UpdateVerificationFlowBody
+    >
+
+    type Groups =
+        | "oidc"
+        | "password"
+        | "profile"
+        | "totp"
+        | "webauthn"
+        | "link"
+        | "lookup_secret"
+
+    type Flows =
+        | LoginFlow
+        | RegistrationFlow
+        | SettingsFlow
+        | VerificationFlow
+        | RecoveryFlow
+
+    export let flow: Flows
     export let title: string = ""
-    export let group: string | undefined = undefined
+    export let group: Groups
     export let messages: UiText[] | Message[] | undefined = undefined
 
     const groups = ["default"];
@@ -13,8 +52,8 @@
         group === "oidc" && groups.pop();
         groups.push(group);
     }
-    
-    let nodes = ui.nodes.filter((node: UiNode) =>
+
+    let nodes = flow.ui.nodes.filter((node: UiNode) =>
         groups.includes(node.group)
     );
 
@@ -27,7 +66,7 @@
         <p class="heading mb-2">{title}</p>
 
         {#if messages}
-            <Messages {messages} />
+            <Messages {messages}/>
         {/if}
 
         <form action={ui.action} method={ui.method}>

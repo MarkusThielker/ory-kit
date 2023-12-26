@@ -48,37 +48,37 @@
         </div>
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.profile.title")}
             group="profile"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.password.title")}
             group="password"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.oidc.title")}
             group="oidc"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.totp.title")}
             group="totp"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.webauthn.title")}
             group="webauthn"
         />
 
         <Flow
-            ui={flow.ui}
+            {flow}
             title={$t("page.settings.lookup_secret.title")}
             group="lookup_secret"
         />
