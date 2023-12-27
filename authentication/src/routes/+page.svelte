@@ -2,6 +2,8 @@
     import { t } from "$lib/i18n";
     import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
     import identity from "$lib/stores/identity";
+
+    const identityJson = $identity ? JSON.stringify($identity, null, 2) : undefined;
 </script>
 
 <svelte:head>
@@ -28,4 +30,9 @@
             <LogoutButton />
         {/if}
     </div>
+</div>
+
+<div class="card mt-8">
+    <h2 class="heading mb-2">Identity</h2>
+    <pre class="bg-neutral-700 p-4 rounded-shape overflow-y-scroll">{ identityJson ? identityJson : "No identity found" }</pre>
 </div>
