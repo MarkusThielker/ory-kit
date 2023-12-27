@@ -34,6 +34,7 @@
         | "webauthn"
         | "link"
         | "lookup_secret"
+        | "code"
 
     type Flows =
         | LoginFlow
