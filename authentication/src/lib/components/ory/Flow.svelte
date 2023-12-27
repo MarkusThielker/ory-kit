@@ -96,9 +96,7 @@
 
         isLoading = true
 
-        setTimeout(() => {
-            dispatch("submit", {flow, body, setLoadingFalse: () => isLoading = false})
-        }, 1000)
+        dispatch("submit", {flow, body, setLoadingFalse: () => isLoading = false})
     }
 
 </script>
