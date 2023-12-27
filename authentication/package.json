@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@ory/client": "^1.4.7",
+    "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "sveltekit-i18n": "^2.4.2"
   }

@@ -4,25 +4,64 @@
     import Flow from "$lib/components/ory/Flow.svelte";
     import { get } from "svelte/store";
     import { page } from "$app/stores";
-    import { onMount } from "svelte";
-    import type { SettingsFlow } from "@ory/client";
-    import identity from "$lib/stores/identity";
+    import type { SettingsFlow, UpdateSettingsFlowBody } from "@ory/client";
     import Messages from "$lib/components/ory/Messages.svelte";
+    import { goto } from "$app/navigation";
+
+    const searchParams = get(page).url.searchParams
 
     let promise: Promise<SettingsFlow>;
-    if (get(page).url.searchParams.get("flow")) {
+
+    const flowId = searchParams.get("flow");
+    if (flowId) {
+
         promise = frontendApi
-            .getSettingsFlow({ id: get(page).url.searchParams.get("flow")! })
+            .getSettingsFlow({id: flowId})
             .then((it) => it.data);
+
     } else {
-        promise = frontendApi.createBrowserSettingsFlow().then((it) => it.data);
+
+        promise = frontendApi
+            .createBrowserSettingsFlow()
+            .then((it) => it.data);
     }
 
-    onMount(() => {
-        if (!$identity) {
-            window.location.replace("/flow/login");
-        }
-    });
+    const handleSubmit = async (
+        {detail: {flow, body, setLoadingFalse}}: CustomEvent<{
+            flow: SettingsFlow,
+            body: UpdateSettingsFlowBody,
+            setLoadingFalse: () => void
+        }>
+    ) => {
+
+        searchParams.set('flow', flow.id);
+        await goto(`?${searchParams.toString()}`, {replaceState: true});
+
+        await frontendApi.updateSettingsFlow({
+            flow: flow.id,
+            updateSettingsFlowBody: body,
+        })
+            .then(({data}) => {
+                promise = Promise.resolve(data)
+
+                if (data.continue_with) {
+                    for (const item of data.continue_with) {
+                        switch (item.action) {
+                            case "show_verification_ui":
+                                goto("/verification?flow=" + item.flow.id)
+                                return
+                        }
+                    }
+                }
+
+                if (data.return_to) {
+                    window.location.href = data.return_to
+                    return
+                }
+            })
+            .finally(setLoadingFalse);
+    }
+
 </script>
 
 <svelte:head>
@@ -43,44 +82,50 @@
 
         <div class="max-w-lg mx-auto">
             {#if flow.ui.messages}
-                <Messages messages={flow.ui.messages} />
+                <Messages messages={flow.ui.messages}/>
             {/if}
         </div>
 
         <Flow
-            {flow}
-            title={$t("page.settings.profile.title")}
-            group="profile"
+                {flow}
+                title={$t("page.settings.profile.title")}
+                group="profile"
+                on:submit={handleSubmit}
         />
 
         <Flow
-            {flow}
-            title={$t("page.settings.password.title")}
-            group="password"
+                {flow}
+                title={$t("page.settings.password.title")}
+                group="password"
+                on:submit={handleSubmit}
         />
 
         <Flow
-            {flow}
-            title={$t("page.settings.oidc.title")}
-            group="oidc"
+                {flow}
+                title={$t("page.settings.oidc.title")}
+                group="oidc"
+                on:submit={handleSubmit}
         />
 
         <Flow
-            {flow}
-            title={$t("page.settings.totp.title")}
-            group="totp"
+                {flow}
+                title={$t("page.settings.totp.title")}
+                group="totp"
+                on:submit={handleSubmit}
         />
 
         <Flow
-            {flow}
-            title={$t("page.settings.webauthn.title")}
-            group="webauthn"
+                {flow}
+                title={$t("page.settings.webauthn.title")}
+                group="webauthn"
+                on:submit={handleSubmit}
         />
 
         <Flow
-            {flow}
-            title={$t("page.settings.lookup_secret.title")}
-            group="lookup_secret"
+                {flow}
+                title={$t("page.settings.lookup_secret.title")}
+                group="lookup_secret"
+                on:submit={handleSubmit}
         />
     {/await}
 </div>

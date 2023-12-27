@@ -3,28 +3,79 @@
     import Flow from "$lib/components/ory/Flow.svelte";
     import { onMount } from "svelte";
     import identity from "$lib/stores/identity";
-    import type { RegistrationFlow } from "@ory/client";
+    import type { RegistrationFlow, UpdateRegistrationFlowBody } from "@ory/client";
     import { get } from "svelte/store";
     import { page } from "$app/stores";
     import { frontendApi } from "$lib/ory";
     import Messages from "$lib/components/ory/Messages.svelte";
+    import { goto } from "$app/navigation";
+    import { handleFlowError } from "$lib/ory/handleFlowError";
+    import { browser } from "$app/environment";
+
+    $: isAuthenticated = $identity && browser;
+    const searchParams = get(page).url.searchParams
 
     let promise: Promise<RegistrationFlow>;
-    if (get(page).url.searchParams.get("flow")) {
+
+    const flowId = searchParams.get("flow");
+    if (flowId) {
+
         promise = frontendApi
-            .getRegistrationFlow({
-                id: get(page).url.searchParams.get("flow")!,
-            })
+            .getRegistrationFlow({id: flowId})
             .then((it) => it.data);
+
     } else {
-        promise = frontendApi.createBrowserRegistrationFlow().then((it) => it.data);
+
+        promise = frontendApi
+            .createBrowserRegistrationFlow()
+            .then((it) => it.data);
+    }
+
+    const handleSubmit = async (
+        {detail: {flow, body, setLoadingFalse}}: CustomEvent<{
+            flow: RegistrationFlow,
+            body: UpdateRegistrationFlowBody,
+            setLoadingFalse: () => void
+        }>
+    ) => {
+
+        searchParams.set('flow', flow.id);
+        await goto(`?${searchParams.toString()}`, {replaceState: true});
+
+        await frontendApi.updateRegistrationFlow({
+            flow: flow.id,
+            updateRegistrationFlowBody: body,
+        })
+            .then(async ({data}) => {
+                identity.set(data.identity)
+                if (data.continue_with) {
+                    for (const item of data.continue_with) {
+                        switch (item.action) {
+                            case "show_verification_ui":
+                                await goto("/flow/verification?flow=" + item.flow.id)
+                                return
+                        }
+                    }
+                }
+                await goto(flow?.return_to || "/")
+            })
+            .catch(handleFlowError("registration", (flow) => {
+                promise = Promise.resolve(flow)
+            }))
+            .catch((err) => {
+                if (err.response?.status === 400) {
+                    promise = Promise.resolve(err.response.data)
+                }
+            })
+            .finally(setLoadingFalse);
     }
 
     onMount(() => {
-        if ($identity) {
+        if (isAuthenticated) {
             window.location.replace("/");
         }
     });
+
 </script>
 
 <svelte:head>
@@ -44,11 +95,13 @@
             {flow}
             title={$t("page.registration.title")}
             group="password"
+            on:submit={handleSubmit}
         />
 
         <Flow
             {flow}
             group="oidc"
+            on:submit={handleSubmit}
         />
 
         <div class="alternative-actions">
