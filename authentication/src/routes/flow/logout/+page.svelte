@@ -4,10 +4,12 @@
     import { onMount } from "svelte";
     import { get } from "svelte/store";
 
+    const searchParams = get(page).url.searchParams
+
     onMount(() => {
-        const requestParameters: {returnTo?: string} = {}
-        if (get(page).url.searchParams.get("return_to")) {
-            requestParameters.returnTo = get(page).url.searchParams.get("return_to")! as string
+        const requestParameters: { returnTo?: string } = {}
+        if (searchParams.get("return_to")) {
+            requestParameters.returnTo = searchParams.get("return_to")! as string
         }
 
         frontendApi.createBrowserLogoutFlow(requestParameters)
