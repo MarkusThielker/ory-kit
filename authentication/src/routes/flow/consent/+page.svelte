@@ -1,12 +1,12 @@
 <script lang="ts">
     import { get } from "svelte/store";
-    import identityStore from "$lib/stores/identity";import { t } from "$lib/i18n";
-    import type { Identity } from "@ory/client";
+    import identityStore from "$lib/stores/identity";
+    import { t } from "$lib/i18n";
     import type { PageData } from "./$types";
 
     export let data: PageData;
 
-    const identity: Identity | null = get(identityStore);
+    const identity = get(identityStore);
 </script>
 
 <svelte:head>
