@@ -7,6 +7,7 @@
     import type { SettingsFlow, UpdateSettingsFlowBody } from "@ory/client";
     import Messages from "$lib/components/ory/Messages.svelte";
     import { goto } from "$app/navigation";
+    import { handleFlowError } from "$lib/ory/handleFlowError";
 
     const searchParams = get(page).url.searchParams
 
@@ -59,6 +60,7 @@
                     return
                 }
             })
+            .catch(handleFlowError("settings"))
             .finally(setLoadingFalse);
     }
 

@@ -50,7 +50,7 @@
                 identity.loadIdentity()
                 promise = Promise.resolve(data)
             })
-            .catch(handleFlowError("recovery", (flow) => promise = Promise.resolve(flow)))
+            .catch(handleFlowError("recovery"))
             .catch((err: AxiosError) => {
                 if (err.response?.status === 400) {
                     promise = Promise.resolve(err.response?.data as RecoveryFlow)

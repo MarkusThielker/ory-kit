@@ -59,9 +59,7 @@
                 }
                 await goto(flow?.return_to || "/")
             })
-            .catch(handleFlowError("registration", (flow) => {
-                promise = Promise.resolve(flow)
-            }))
+            .catch(handleFlowError("registration"))
             .catch((err) => {
                 if (err.response?.status === 400) {
                     promise = Promise.resolve(err.response.data)

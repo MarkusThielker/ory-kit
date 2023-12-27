@@ -64,7 +64,7 @@
                 }
                 identity.loadIdentity("/")
             })
-            .catch(handleFlowError("login", (flow) => promise = Promise.resolve(flow)))
+            .catch(handleFlowError("login"))
             .catch((err) => {
                 if (err.response?.status === 400) {
                     promise = Promise.resolve(err.response.data)

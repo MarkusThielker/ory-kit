@@ -50,9 +50,7 @@
             .then(({data}) => {
                 promise = Promise.resolve(data)
             })
-            .catch(handleFlowError("verification", (flow) => {
-                promise = Promise.resolve(flow)
-            }))
+            .catch(handleFlowError("verification"))
             .catch((err) => {
                 switch (err.response?.status) {
                     case 410:
