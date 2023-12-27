@@ -7,10 +7,7 @@
     import { get } from "svelte/store";
     import { goto } from "$app/navigation";
     import { handleFlowError } from "$lib/ory/handleFlowError";
-    import identity from "$lib/stores/identity";
-    import { browser } from "$app/environment";
 
-    $: isAuthenticated = $identity && browser;
     const searchParams = get(page).url.searchParams
 
     let promise: Promise<VerificationFlow>;
