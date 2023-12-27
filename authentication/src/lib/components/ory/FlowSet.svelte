@@ -10,7 +10,7 @@
     export let nodes: Array<UiNode>;
 </script>
 
-<div class="flex flex-col space-y-1">
+<div class="flex flex-col space-y-1 w-full">
     {#each nodes as node}
         {#if node.type === UiNodeTypeEnum.Input}
             <FlowInput {node} />

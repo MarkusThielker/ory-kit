@@ -60,6 +60,47 @@
 
     // only show flow if there are non-default nodes
     $: showFlow = nodes.find((node: UiNode) => node.group !== "default")
+
+    const dispatch = createEventDispatcher()
+    let isLoading = false
+
+    const handleSubmit = (event: SubmitEvent) => {
+
+        // Prevent all native handlers
+        event.stopPropagation()
+        event.preventDefault()
+
+        // Prevent double submission!
+        if (isLoading) {
+            return
+        }
+
+        const form = event.currentTarget
+
+        let body: Values | undefined
+
+        if (form && form instanceof HTMLFormElement) {
+            const formData = new FormData(form)
+
+            // map the entire form data to JSON for the request body
+            body = Object.fromEntries(formData) as Values
+
+            if (event.submitter) {
+                const submitterTyped = event.submitter as HTMLInputElement
+                body = {
+                    ...body,
+                    ...{[submitterTyped.name]: submitterTyped.value},
+                }
+            }
+        }
+
+        isLoading = true
+
+        setTimeout(() => {
+            dispatch("submit", {flow, body, setLoadingFalse: () => isLoading = false})
+        }, 1000)
+    }
+
 </script>
 
 {#if showFlow}
@@ -70,7 +111,7 @@
             <Messages {messages}/>
         {/if}
 
-        <form action={ui.action} method={ui.method}>
+        <form class={`flex relative duration-300 ${isLoading ? 'opacity-30' : ''}`} on:submit={handleSubmit}>
             <FlowSet {nodes} />
         </form>
     </div>
