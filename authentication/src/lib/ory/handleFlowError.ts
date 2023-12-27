@@ -1,4 +1,11 @@
 import type { AxiosError } from "axios";
+import toasts from "$lib/stores/toasts";
+
+const resetFlow = () => {
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.delete("flow")
+    window.location.search = searchParams.toString()
+}
 
 export function handleFlowGetError(
     flowType: "login" | "registration" | "settings" | "recovery" | "verification",
@@ -33,27 +40,25 @@ export function handleFlowGetError(
                 return
             case "self_service_flow_return_to_forbidden":
                 // The flow expired, let's request a new one.
-                // toast.error("The return_to address is not allowed.")
-                // resetFlow(undefined)
+                toasts.showError("The return_to address is not allowed.")
+                resetFlow()
                 window.location.replace("/flow/" + flowType)
                 return
             case "self_service_flow_expired":
                 // The flow expired, let's request a new one.
-                // toast.error("Your interaction expired, please fill out the form again.")
-                // resetFlow(undefined)
+                toasts.showError("Your interaction expired, please fill out the form again.")
+                resetFlow()
                 window.location.replace("/flow/" + flowType)
                 return
             case "security_csrf_violation":
                 // A CSRF violation occurred. Best to just refresh the flow!
-                // toast.error(
-                //     "A security violation was detected, please fill out the form again.",
-                // )
-                // resetFlow(undefined)
+                toasts.showError("A security violation was detected, please fill out the form again.")
+                resetFlow()
                 window.location.replace("/flow/" + flowType)
                 return
             case "security_identity_mismatch":
                 // The requested item was intended for someone else. Let's request a new flow...
-                // resetFlow(undefined)
+                resetFlow()
                 window.location.replace("/flow/" + flowType)
                 return
             case "browser_location_change_required":
@@ -65,7 +70,7 @@ export function handleFlowGetError(
         switch (err.response?.status) {
             case 410:
                 // The flow expired, let's request a new one.
-                // resetFlow(undefined)
+                resetFlow()
                 window.location.replace("/flow/" + flowType)
                 return
         }
