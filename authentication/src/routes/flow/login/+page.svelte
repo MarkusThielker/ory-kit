@@ -5,24 +5,18 @@
     import { page } from "$app/stores";
     import type { FrontendApiCreateBrowserLoginFlowRequest, LoginFlow, UpdateLoginFlowBody } from "@ory/client";
     import identity from "$lib/stores/identity";
-    import { browser } from "$app/environment";
     import LogoutButton from "$lib/components/ory/LogoutButton.svelte";
     import Messages from "$lib/components/ory/Messages.svelte";
     import { goto } from "$app/navigation";
     import { handleFlowError } from "$lib/ory/handleFlowError";
     import { get } from "svelte/store";
 
-    $: isAuthenticated = $identity && browser;
     const searchParams = get(page).url.searchParams
 
     let promise: Promise<LoginFlow>;
 
     const flowId = searchParams.get("flow");
     if (flowId) {
-
-        if (isAuthenticated) {
-            window.location.replace("/");
-        }
 
         promise = frontendApi
             .getLoginFlow({id: flowId})

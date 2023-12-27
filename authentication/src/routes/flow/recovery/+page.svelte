@@ -3,16 +3,13 @@
     import { t } from "$lib/i18n";
     import Flow from "$lib/components/ory/Flow.svelte";
     import type { RecoveryFlow, UpdateRecoveryFlowBody, } from "@ory/client";
-    import { onMount } from "svelte";
     import identity from "$lib/stores/identity";
     import { get } from "svelte/store";
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
     import { handleFlowError } from "$lib/ory/handleFlowError";
     import type { AxiosError } from "axios";
-    import { browser } from "$app/environment";
 
-    $: isAuthenticated = $identity && browser;
     const searchParams = get(page).url.searchParams
 
     let promise: Promise<RecoveryFlow>;
@@ -60,12 +57,6 @@
             })
             .finally(setLoadingFalse);
     }
-
-    onMount(() => {
-        if (isAuthenticated) {
-            window.location.replace("/");
-        }
-    });
 
 </script>
 

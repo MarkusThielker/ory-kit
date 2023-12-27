@@ -9,7 +9,6 @@
     import { handleFlowError } from "$lib/ory/handleFlowError";
     import identity from "$lib/stores/identity";
     import { browser } from "$app/environment";
-    import { onMount } from "svelte";
 
     $: isAuthenticated = $identity && browser;
     const searchParams = get(page).url.searchParams
@@ -62,12 +61,6 @@
             })
             .finally(setLoadingFalse);
     }
-
-    onMount(() => {
-        if (isAuthenticated) {
-            window.location.replace("/");
-        }
-    });
 
 </script>
 

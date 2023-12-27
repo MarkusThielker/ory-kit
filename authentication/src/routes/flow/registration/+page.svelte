@@ -1,7 +1,6 @@
 <script lang="ts">
     import { t } from "$lib/i18n";
     import Flow from "$lib/components/ory/Flow.svelte";
-    import { onMount } from "svelte";
     import identity from "$lib/stores/identity";
     import type { RegistrationFlow, UpdateRegistrationFlowBody } from "@ory/client";
     import { get } from "svelte/store";
@@ -10,9 +9,7 @@
     import Messages from "$lib/components/ory/Messages.svelte";
     import { goto } from "$app/navigation";
     import { handleFlowError } from "$lib/ory/handleFlowError";
-    import { browser } from "$app/environment";
 
-    $: isAuthenticated = $identity && browser;
     const searchParams = get(page).url.searchParams
 
     let promise: Promise<RegistrationFlow>;
@@ -67,12 +64,6 @@
             })
             .finally(setLoadingFalse);
     }
-
-    onMount(() => {
-        if (isAuthenticated) {
-            window.location.replace("/");
-        }
-    });
 
 </script>
 
