@@ -1,7 +1,8 @@
 <script lang="ts">
     import { t } from "$lib/i18n";
-    import { UiTextTypeEnum, type Message, type UiText } from "@ory/client";
+    import { type Message, type UiText, UiTextTypeEnum } from "@ory/client";
 
+    /** the list of messages to show */
     export let messages: UiText[] | Message[] | undefined;
 
     let messagesTyped: UiText[] = messages?.map((it) => it as UiText) ?? [];
@@ -17,6 +18,21 @@
         }
     }
 </script>
+
+<!--
+@component
+
+# Messages
+This component displays a list of messages.
+Can be used to display messages in one place instead of each flow component displaying its own messages.
+
+## Example
+```svelte
+{#if flow.ui.messages}
+    <Messages messages={flow.ui.messages}/>
+{/if}
+```
+-->
 
 <div class="mb-2">
     {#if messages}

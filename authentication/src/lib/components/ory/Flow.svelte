@@ -43,9 +43,13 @@
         | VerificationFlow
         | RecoveryFlow
 
+    /** the flow object returned by the ORY sdk */
     export let flow: Flows
+    /** the title to show inside at the top of the card */
     export let title: string = ""
+    /** the internal of UI nodes to show in the card */
     export let group: Groups
+    /** The messages to show inside the card. Leave empty to show no messages */
     export let messages: UiText[] | Message[] | undefined = undefined
 
     const groups = ["default"];
@@ -100,6 +104,25 @@
     }
 
 </script>
+
+<!--
+@component
+
+# Flow
+A flow is a collection of UI nodes, provided by the Ory Kratos API, that are rendered in a card.
+The flow component is responsible for rendering the UI nodes and handling the submission of the form.
+Always specify the `group` prop and pass the flow object, otherwise the component will not render anything.
+To handle submission of the form, listen to the `submit` event. The properties contain the flow, form
+data and a function to reset the loading state.
+
+## Example
+```svelte
+<Flow
+    {flow}
+    group="password"
+    on:submit={({flow, body, setLoadingFalse}) => ...}/>
+```
+-->
 
 {#if showFlow}
     <div class="card">
