@@ -2,9 +2,17 @@
     import { fromNode, t } from "$lib/i18n";
     import type { UiNode, UiNodeTextAttributes } from "@ory/client";
 
+    /** the node to render */
     export let node: UiNode;
     const attributes = node.attributes as UiNodeTextAttributes;
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow component to render a text node.
+-->
 
 {$t(fromNode(node), node.meta?.label?.context)}
 {#if attributes.text.id === 1050015} <!-- lookup_secret_codes -->

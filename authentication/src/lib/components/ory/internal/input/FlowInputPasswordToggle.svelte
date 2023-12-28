@@ -1,11 +1,22 @@
 <script lang="ts">
+
+    /** the current state if the password is hidden */
     export let isHidden: boolean;
+
+    /** a string appended to the icons html class value */
     export let classNames: string = "";
 
     const toggleVisibility = () => {
         isHidden = !isHidden;
     };
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow password input to show/hide the password.
+-->
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg

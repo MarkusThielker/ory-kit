@@ -14,9 +14,18 @@
     import FlowInputDate from "$lib/components/ory/internal/input/FlowInputDate.svelte";
     import FlowInputUrl from "$lib/components/ory/internal/input/FlowInputUrl.svelte";
 
+    /** the node to render */
     export let node: UiNode;
     const attributes = node.attributes as UiNodeInputAttributes;
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow component to determine the input node type
+and render the input depending on that type.
+-->
 
 {#if attributes.type === UiNodeInputAttributesTypeEnum.Text}
     <FlowInputText {node} />

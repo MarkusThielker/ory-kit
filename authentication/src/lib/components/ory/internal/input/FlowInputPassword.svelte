@@ -4,11 +4,19 @@
     import PasswordToggle from "$lib/components/ory/internal/input/FlowInputPasswordToggle.svelte";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
 
+    /** the node to render */
     export let node: UiNode;
     const attributes = node.attributes as UiNodeInputAttributes;
 
     let isHidden = true;
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow component to render a password input.
+-->
 
 <fieldset>
     <label class="flex flex-col">

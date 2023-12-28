@@ -3,12 +3,20 @@
     import { UiNodeTypeEnum } from "@ory/client";
     import FlowImage from "$lib/components/ory/internal/FlowImage.svelte";
     import FlowText from "$lib/components/ory/internal/FlowText.svelte";
-    import FlowInput from "$lib/components/ory/internal/input/FlowInput.svelte";
+    import FlowInput from "$lib/components/ory/internal/FlowInput.svelte";
     import FlowScript from "./FlowScript.svelte";
     import FlowAnchor from "./FlowAnchor.svelte";
 
+    /** the node to render */
     export let nodes: Array<UiNode>;
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow component to determine the node type and render the node depending on that type.
+-->
 
 <div class="flex flex-col space-y-1 w-full">
     {#each nodes as node}
