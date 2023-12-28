@@ -111,3 +111,7 @@ a {
 .alert-error {
     @apply alert bg-red-100 border-red-500 text-red-700;
 }
+
+.code-block {
+    @apply rounded-shape bg-neutral-100 dark:bg-neutral-800 p-4 overflow-y-scroll duration-300;
+}
