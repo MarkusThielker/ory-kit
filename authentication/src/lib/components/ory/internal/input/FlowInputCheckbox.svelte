@@ -1,11 +1,19 @@
 <script lang="ts">
-    import { t, fromNode } from "$lib/i18n";
+    import { fromNode, t } from "$lib/i18n";
     import Messages from "$lib/components/ory/Messages.svelte";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
 
+    /** the node to render */
     export let node: UiNode;
     const attributes = node.attributes as UiNodeInputAttributes;
 </script>
+
+<!--
+@component
+# Do NOT use this internal component outside of the flow component tree!
+
+This component is used by the flow component to render a checkbox.
+-->
 
 <fieldset>
     <label>
@@ -16,8 +24,8 @@
             name={attributes.name}
             placeholder={$t(fromNode(node), node.meta.label?.context)}
             required={attributes.required}
-            type="number"
-            value={attributes.value ?? ""}
+            type="checkbox"
+            checked={attributes.value ?? false}
         />
     </label>
 </fieldset>
