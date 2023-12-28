@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { t, fromNode } from "$lib/i18n";
+    import { fromNode, t } from "$lib/i18n";
     import type { UiNode, UiNodeTextAttributes } from "@ory/client";
 
     export let node: UiNode;

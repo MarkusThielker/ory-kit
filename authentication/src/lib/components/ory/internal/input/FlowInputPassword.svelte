@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { t, fromNode } from "$lib/i18n";
+    import { fromNode, t } from "$lib/i18n";
     import Messages from "$lib/components/ory/Messages.svelte";
-    import PasswordToggle from "$lib/components/ory/input/FlowInputPasswordToggle.svelte";
+    import PasswordToggle from "$lib/components/ory/internal/input/FlowInputPasswordToggle.svelte";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
 
     export let node: UiNode;

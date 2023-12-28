@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { t, fromNode } from "$lib/i18n";
+    import { fromNode, t } from "$lib/i18n";
     import Messages from "$lib/components/ory/Messages.svelte";
     import type { UiNode, UiNodeInputAttributes } from "@ory/client";
 
@@ -16,8 +16,8 @@
             name={attributes.name}
             placeholder={$t(fromNode(node), node.meta.label?.context)}
             required={attributes.required}
-            type="checkbox"
-            checked={attributes.value ?? false}
+            type="date"
+            value={attributes.value ?? ""}
         />
     </label>
 </fieldset>

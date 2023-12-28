@@ -1,5 +1,5 @@
 <script lang="ts">
-    import FlowSet from "$lib/components/ory/FlowSet.svelte";
+    import FlowSet from "$lib/components/ory/internal/FlowSet.svelte";
     import Messages from "$lib/components/ory/Messages.svelte";
     import type {
         LoginFlow,
