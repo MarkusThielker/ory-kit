@@ -3,12 +3,10 @@
     import Messages from "$lib/components/ory/Messages.svelte";
     import type {
         LoginFlow,
-        Message,
         RecoveryFlow,
         RegistrationFlow,
         SettingsFlow,
         UiNode,
-        UiText,
         UpdateLoginFlowBody,
         UpdateRecoveryFlowBody,
         UpdateRegistrationFlowBody,
@@ -50,7 +48,7 @@
     /** the internal of UI nodes to show in the card */
     export let group: Groups
     /** The messages to show inside the card. Leave empty to show no messages */
-    export let messages: UiText[] | Message[] | undefined = undefined
+    export let showMessages: boolean = false
 
     const groups = ["default"];
     if (group) {
@@ -128,8 +126,8 @@ data and a function to reset the loading state.
     <div class="card">
         <p class="heading mb-2">{title}</p>
 
-        {#if messages}
-            <Messages {messages}/>
+        {#if flow.ui.messages && showMessages}
+            <Messages messages={flow.ui.messages}/>
         {/if}
 
         <form class={`flex relative duration-300 ${isLoading ? 'opacity-30' : ''}`} on:submit={handleSubmit}>
