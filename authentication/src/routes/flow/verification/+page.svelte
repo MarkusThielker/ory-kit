@@ -70,7 +70,7 @@
         {flow}
         title={$t("page.verification.title")}
         group={"code"}
-        messages={flow.ui.messages}
+        showMessages
         on:submit={handleSubmit}
     />
 {/await}

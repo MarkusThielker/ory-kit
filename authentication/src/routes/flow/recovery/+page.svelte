@@ -69,7 +69,7 @@
         {flow}
         title={$t("page.recovery.title")}
         group="code"
-        messages={flow.ui.messages}
+        showMessages
         on:submit={handleSubmit}
     />
 {/await}
